@@ -1,8 +1,10 @@
-class Player extends Phaser.GameObject.Sprite{
-    constructor(x, y, texture, frame){
-        super(x, y, texture, frame);
+class Player extends Phaser.GameObjects.Sprite{
+    constructor(scene, x, y, texture, frame){
+        super(scene, x, y, texture, frame);
 
-        scene.add.existing(this);
+        //add to scene
+        scene.add.existing(this);           //add the sprite
+        scene.physics.add.existing(this);   //add the physics
         //set controls
         this.moveUp     =   keyUP;
         this.moveDown   =   keyDOWN;
@@ -10,23 +12,57 @@ class Player extends Phaser.GameObject.Sprite{
         this.moveRight  =   keyRIGHT;
         //player properties
         this.stunned = false;
+        this.immune = false;
+        this.speed = 250;
     }
 
     update(){
         //left-right movement
-        if(!this.stunned && this.moveLeft.keyDown){
-            //move left
+        if(!this.stunned && this.moveLeft.isDown){
+            this.body.setVelocityX(-this.speed);
         }
-        else if(!this.stunned && this.moveRight.keyDown){
-            //move right
+        else if(!this.stunned && this.moveRight.isDown){
+            this.body.setVelocityX(this.speed);
+        }
+        else{
+            this.body.setVelocityX(0);
         }
 
         //up-down movement
-        if(!this.stunned && this.moveUp.keyDown){
-            //move up
+        if(!this.stunned && this.moveUp.isDown){
+            this.body.setVelocityY(-this.speed);
         }
-        else if(!this.stunned && this.moveDown.keyDown){
-            //move down
+        else if(!this.stunned && this.moveDown.isDown){
+            this.body.setVelocityY(this.speed);
         }
+        else{
+            this.body.setVelocityY(0);
+        }
+
+        if(this.y > config.height){
+            this.defeat();
+        }
+    }
+
+    //stuns the player for 1 second
+    startStun(){
+        if(!this.stunned && !this.immune){
+            console.log("You've been stunned!");
+            this.stunned = true;
+            this.scene.time.delayedCall(1000, () => {
+                this.stunned = false;
+                this.immune = true;
+                console.log("Now you're immune!");
+            }, null, this);
+            this.scene.time.delayedCall(2000, () => {
+                this.immune = false;
+            })
+        }
+    }
+
+    defeat(){
+        this.stunned = true;
+        console.log("You lose!");
+        this.scene.gameOver = true;
     }
 }

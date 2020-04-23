@@ -4,9 +4,15 @@ Header Commend Goes Here
 
 let config = {
     type: Phaser.CANVAS,
-    width: 640,
-    height: 460,
-    scene: [ Play ]
+    width: 720,
+    height: 360,
+    scene: [ Play ],
+    physics:{
+        default: "arcade",
+        arcade:{
+            debug: false
+        }
+    }
 }
 
 let game = new Phaser.Game(config);
