@@ -6,8 +6,8 @@ class Play extends Phaser.Scene{
     //for loading assets
     preload(){
         //placeholder tiles
-        this.load.image('player', './assets/player_placeholder.png');
-        this.load.image('backgroundTile', './assets/background_placeholder.png');
+        this.load.image('player', './assets/orc_monk.png');
+        this.load.image('backgroundTile', './assets/dirt.png');
         this.load.image('obstacle', './assets/obstacle_placeholder.png');
         this.load.image('invisible_wall', './assets/invisible_wall.png');
         this.load.image('invisible_wall_rotated', './assets/invisible_wall_rotated.png');
@@ -22,7 +22,13 @@ class Play extends Phaser.Scene{
         keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         
         //setting background tiles
-        this.background = this.add.tileSprite(0, 0, 32, 23, 'backgroundTile').setOrigin(0, 0).setScale(20);
+        this.background = this.add.tileSprite(
+            0, 
+            0, 
+            config.width/2, 
+            config.height/2, 
+            'backgroundTile'
+            ).setOrigin(0, 0).setScale(5.625);
         
         //creating invisible walls
         //don't forget to make these, ya know, actually invisible
@@ -51,7 +57,7 @@ class Play extends Phaser.Scene{
             defaultKey: null,               //default texture to use
             defaultFrame: null,             //default animation frame start to use
             active: true,
-            maxSize: 10,
+            maxSize: 15,
             runChildUpdate: true,
             createCallback: null,           //what to do when an object is added to the group
             removeCallback: null,           //what to do when an object is removed from the group
@@ -81,13 +87,11 @@ class Play extends Phaser.Scene{
     update(){
         //background scrolling
         this.background.tilePositionY -= 0.5;
+
+        //game functionality
         if(!this.gameOver){
             //entity updating
             this.player.update();
-
-            //ideally this happens at a larger time-based interval, but
-            //  I can't figure that out yet
-            //this.createObstacle();
         }
     }
 
