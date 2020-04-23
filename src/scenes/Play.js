@@ -20,8 +20,10 @@ class Play extends Phaser.Scene{
         keyRIGHT =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        
         //setting background tiles
         this.background = this.add.tileSprite(0, 0, 32, 23, 'backgroundTile').setOrigin(0, 0).setScale(20);
+        
         //creating invisible walls
         //don't forget to make these, ya know, actually invisible
         this.invisibleWallsGroup = this.add.group({
@@ -33,7 +35,7 @@ class Play extends Phaser.Scene{
             this.physics.add.sprite((config.width*5/6)+100, config.height/2, 'invisible_wall').setImmovable(),
             this.physics.add.sprite(config.width/2, 0, 'invisible_wall_rotated').setImmovable()
         ]);
-        //this.invisLEFT = this.physics.add.sprite((config.width/6)-100,config.height/2, 'invisible_wall').setImmovable();
+        
         //creating the player
         this.player = new Player(
             this, 
@@ -42,6 +44,7 @@ class Play extends Phaser.Scene{
             'player',
             0
             ).setOrigin(0, 0);
+        
         //creating the group to hold all the obstacles
         this.obstacleGroup = this.add.group({
             classType: Phaser.GameObjects.Sprite.Obstacle,
@@ -53,12 +56,23 @@ class Play extends Phaser.Scene{
             createCallback: null,           //what to do when an object is added to the group
             removeCallback: null,           //what to do when an object is removed from the group
             createMultipleCallback: null    //what to do when multiple objects are added to the group
-        })
+        });
+
+        //obstacle spawining timer
+        this.obstacleSpawnTimer = this.time.addEvent({
+            delay: 250,                // ms
+            callback: this.createObstacle,
+            //args: [],
+            callbackScope: this,
+            loop: true
+        });
+        
         //creating colliders
         this.physics.add.collider(this.player, this.obstacleGroup, function(player){
             player.startStun();
         });
         this.physics.add.collider(this.player, this.invisibleWallsGroup);
+        
         //game-over flag
         this.gameOver = false;
     }
@@ -73,7 +87,7 @@ class Play extends Phaser.Scene{
 
             //ideally this happens at a larger time-based interval, but
             //  I can't figure that out yet
-            this.createObstacle();
+            //this.createObstacle();
         }
     }
 
@@ -82,7 +96,7 @@ class Play extends Phaser.Scene{
             this.obstacleGroup.add(new Obstacle(
                 this, 
                 Phaser.Math.Between(config.width/6, config.width*5/6), 
-                0, 
+                -32, 
                 'obstacle'
                 )
             );

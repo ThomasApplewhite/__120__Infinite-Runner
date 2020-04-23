@@ -49,12 +49,12 @@ class Player extends Phaser.GameObjects.Sprite{
         if(!this.stunned && !this.immune){
             console.log("You've been stunned!");
             this.stunned = true;
-            this.scene.time.delayedCall(1000, () => {
+            this.scene.time.delayedCall(250, () => {
                 this.stunned = false;
                 this.immune = true;
                 console.log("Now you're immune!");
             }, null, this);
-            this.scene.time.delayedCall(2000, () => {
+            this.scene.time.delayedCall(500, () => {
                 this.immune = false;
             })
         }
