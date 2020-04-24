@@ -6,12 +6,15 @@ class Play extends Phaser.Scene{
     //for loading assets
     preload(){
         //placeholder tiles
+        //Lines with a /*$*/ are still usimg placeholder assets
         this.load.image('player', './assets/orc_monk.png');
         this.load.image('backgroundTile', './assets/dirt.png');
-        this.load.image('obstacle', './assets/obstacle_placeholder.png');
-        this.load.image('invisible_wall', './assets/invisible_wall.png');
-        this.load.image('invisible_wall_rotated', './assets/invisible_wall_rotated.png');
-        this.load.image('zombie', './assets/zombie_placeholder.png');
+        /*$*/this.load.image('obstacle', './assets/obstacle_placeholder.png');
+        /*$*/this.load.image('invisible_wall', './assets/invisible_wall.png');
+        /*$*/this.load.image('invisible_wall_rotated', './assets/invisible_wall_rotated.png');
+        /*$*/this.load.image('zombie', './assets/zombie_placeholder.png');
+        /*$*/this.load.image('magic_missile', './assets/magic_missile_placeholder.png');
+        /*$*/this.load.image('magic_missile_blast', './assets/magic_missile_blast_placeholder.png');
     }
 
     //placing scene objects before game start
@@ -21,6 +24,8 @@ class Play extends Phaser.Scene{
         keyRIGHT =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyQ     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        keyE     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);   //magic missile
         
         //setting background tiles
         this.background = this.add.tileSprite(

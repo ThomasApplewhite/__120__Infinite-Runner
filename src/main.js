@@ -20,6 +20,6 @@ game.settings = {
 }
 
 //reserving keyboard keys
-let keyLEFT, keyRIGHT, keyUP, keyDOWN;
+let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE;
 
 //don't forget to use python -m http.server to start the terminal server B

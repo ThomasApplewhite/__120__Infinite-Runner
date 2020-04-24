@@ -6,16 +6,19 @@ class Player extends Phaser.GameObjects.Sprite{
         scene.add.existing(this);           //add the sprite
         scene.physics.add.existing(this);   //add the physics
         //set controls
-        this.moveUp     =   keyUP;
-        this.moveDown   =   keyDOWN;
-        this.moveLeft   =   keyLEFT;
-        this.moveRight  =   keyRIGHT;
+        this.moveUp         =   keyUP;
+        this.moveDown       =   keyDOWN;
+        this.moveLeft       =   keyLEFT;
+        this.moveRight      =   keyRIGHT;
+        this.specialAttack  =   keyE;
         //player properties
         this.stunned = false;
         this.immune = false;
         this.speed = 250;
         this.score = 0;
         this.distance = 0;
+        //attack cooldowns
+        this.canSpecial = true;
     }
 
     update(){
@@ -41,6 +44,10 @@ class Player extends Phaser.GameObjects.Sprite{
         }
         else{
             this.body.setVelocityY(0);
+        }
+
+        if(!this.stunned && this.specialAttack.isDown){
+            this.magicMissileAttack();
         }
 
         if(this.y > config.height){
@@ -74,7 +81,18 @@ class Player extends Phaser.GameObjects.Sprite{
     }
 
     magicMissileAttack(){
-
+        if(this.canSpecial){
+            //create magic missile
+            new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
+            //start cooldown
+            this.canSpecial = false;
+            this.scene.time.delayedCall({
+                delay: 4000,
+                callback: function(){this.canSpecial = true;},
+                //args: [],
+                //callbackScope: this,
+            })
+        }
     }
 
     punchAttack(){
