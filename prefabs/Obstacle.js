@@ -20,13 +20,13 @@ class Obstacle extends Phaser.GameObjects.Sprite{
         }
     }
 
-
+    //how the obstacle will move by default
     configureMovement(){
-        //throw new Error("configureMovement not implemented in " + this);
         this.body.setVelocityY(250);
         this.body.setImmovable();
     }
 
+    //frame-by-frame movement
     movementPattern(){
 
     }

@@ -14,9 +14,13 @@ class Player extends Phaser.GameObjects.Sprite{
         this.stunned = false;
         this.immune = false;
         this.speed = 250;
+        this.score = 0;
+        this.distance = 0;
     }
 
     update(){
+        ++this.distance;
+
         //left-right movement
         if(!this.stunned && this.moveLeft.isDown){
             this.body.setVelocityX(-this.speed);
@@ -42,6 +46,7 @@ class Player extends Phaser.GameObjects.Sprite{
         if(this.y > config.height){
             this.defeat();
         }
+
     }
 
     //stuns the player for 1 second
@@ -63,6 +68,16 @@ class Player extends Phaser.GameObjects.Sprite{
     defeat(){
         this.stunned = true;
         console.log("You lose!");
+        console.log("Score: " + this.score);
+        console.log("Distance: " + this.distance);
         this.scene.gameOver = true;
+    }
+
+    magicMissileAttack(){
+
+    }
+
+    punchAttack(){
+
     }
 }

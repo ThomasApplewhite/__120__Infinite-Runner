@@ -6,11 +6,13 @@
     <title>120 Infinite Runner</title>
 </head>
 <body>
-    <script src="./lib/phaser.js"></script>     <!--This always goes first-->
-    <script src="./prefabs/Obstacle.js"></script>
+    <script src="./lib/phaser.js"></script>         <!--This always goes first-->
     <script src="./prefabs/Player.js"></script>
+    <script src="./prefabs/Obstacle.js"></script>   <!--Obstacles are defined below here-->
+    <script src="./prefabs/Enemy.js"></script>      <!--Enemies are defined below here-->
+    <script src="./prefabs/enemies/Zombie.js"></script>
     <script src="./src/scenes/Menu.js"></script>
     <script src="./src/scenes/Play.js"></script>
-    <script src="./src/main.js"></script>       <!--This always goes last-->
+    <script src="./src/main.js"></script>           <!--This always goes last-->
 </body>
 </html>

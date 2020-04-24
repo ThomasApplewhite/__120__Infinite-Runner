@@ -11,6 +11,7 @@ class Play extends Phaser.Scene{
         this.load.image('obstacle', './assets/obstacle_placeholder.png');
         this.load.image('invisible_wall', './assets/invisible_wall.png');
         this.load.image('invisible_wall_rotated', './assets/invisible_wall_rotated.png');
+        this.load.image('zombie', './assets/zombie_placeholder.png');
     }
 
     //placing scene objects before game start
@@ -37,16 +38,16 @@ class Play extends Phaser.Scene{
             active: true,
             runChildUpdate: false
         }).addMultiple([
-            this.physics.add.sprite((config.width/6)-100, config.height/2, 'invisible_wall').setImmovable(),
-            this.physics.add.sprite((config.width*5/6)+100, config.height/2, 'invisible_wall').setImmovable(),
-            this.physics.add.sprite(config.width/2, 0, 'invisible_wall_rotated').setImmovable()
+            this.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable(),
+            this.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable(),
+            this.physics.add.sprite(config.width/2, (config.height/3)-50, 'invisible_wall_rotated').setImmovable()
         ]);
         
         //creating the player
         this.player = new Player(
             this, 
             config.width/2, 
-            config.height*5/6, 
+            config.height*2/3, 
             'player',
             0
             ).setOrigin(0, 0);
@@ -64,10 +65,27 @@ class Play extends Phaser.Scene{
             createMultipleCallback: null    //what to do when multiple objects are added to the group
         });
 
-        //obstacle spawining timer
+        //creating the group to hold all the enmies
+        this.enemyGroup = this.add.group({
+            classType: Phaser.GameObjects.Sprite.Enemy,
+            active: true,
+            maxSize: 5,
+            runChildUpdate: true
+        });
+
+        //obstacle spawning timer
         this.obstacleSpawnTimer = this.time.addEvent({
             delay: 250,                // ms
             callback: this.createObstacle,
+            //args: [],
+            callbackScope: this,
+            loop: true
+        });
+
+        //enemy spawning timer
+        this.enemySpawnTimer = this.time.addEvent({
+            delay: 500,
+            callback: this.createEnemy,
             //args: [],
             callbackScope: this,
             loop: true
@@ -77,7 +95,14 @@ class Play extends Phaser.Scene{
         this.physics.add.collider(this.player, this.obstacleGroup, function(player){
             player.startStun();
         });
+        this.physics.add.collider(this.player, this.enemyGroup, function(player, enemy){
+            enemy.onAttack(player);
+        });
+        //creating colliders for things that just need to collide
         this.physics.add.collider(this.player, this.invisibleWallsGroup);
+        this.physics.add.collider(this.enemyGroup, this.obstacleGroup);
+        this.physics.add.collider(this.enemyGroup, this.enemyGroup);
+        //this.physics.add.collider(this.enemyGroup, this.invisibleWallsGroup);
         
         //game-over flag
         this.gameOver = false;
@@ -96,12 +121,27 @@ class Play extends Phaser.Scene{
     }
 
     createObstacle(){
-        if(!this.obstacleGroup.isFull()){
+        if(!this.gameOver && !this.obstacleGroup.isFull()){
             this.obstacleGroup.add(new Obstacle(
-                this, 
-                Phaser.Math.Between(config.width/6, config.width*5/6), 
-                -32, 
-                'obstacle'
+                this,                                   //scene
+                Phaser.Math.Between(0, config.width),   //x
+                -32,                                    //y
+                'obstacle'                              //sprite
+                )
+            );
+        }
+    }
+
+    createEnemy(){
+        if(!this.gameOver && !this.enemyGroup.isFull()){
+            this.enemyGroup.add(new Zombie(
+                this,                                   //scene
+                Phaser.Math.Between(0, config.width),    //x
+                -32,                                    //y
+                'zombie',                               //sprite
+                0,                                      //start frame of anim
+                1,                                      //HP
+                10                                      //points
                 )
             );
         }

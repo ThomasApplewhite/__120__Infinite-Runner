@@ -4,8 +4,8 @@ Header Commend Goes Here
 
 let config = {
     type: Phaser.CANVAS,
-    width: 720,
-    height: 720,
+    width: 800,
+    height: 600,
     scene: [ Play ],
     physics:{
         default: "arcade",
