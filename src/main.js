@@ -22,4 +22,8 @@ game.settings = {
 //reserving keyboard keys
 let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE;
 
+if (game.sound.context.state === 'suspended') {
+    game.sound.context.resume();
+}
+
 //don't forget to use python -m http.server to start the terminal server B
