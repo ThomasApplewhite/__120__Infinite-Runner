@@ -5,17 +5,31 @@ class Play extends Phaser.Scene{
     
     //for loading assets
     preload(){
-        //placeholder tiles
+        //placeholder images
         //Lines with a /*$*/ are still usimg placeholder assets
-        this.load.image('player', './assets/orc_monk.png');
+        /*$*/this.load.image('obstacle', './assets/placeholders/obstacle_placeholder.png');
+        /*$*/this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
+        /*$*/this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');      
+        /*$*/this.load.image('magic_missile', './assets/placeholders/magic_missile_placeholder.png');
+        /*$*/this.load.image('magic_missile_blast', './assets/placeholders/magic_missile_blast_placeholder.png');
+        /*$*/this.load.image('orc_punch', './assets/placeholders/orc_punch_placeholder.png');
+
+        //background images
         this.load.image('backgroundTile', './assets/dirt.png');
-        /*$*/this.load.image('obstacle', './assets/obstacle_placeholder.png');
-        /*$*/this.load.image('invisible_wall', './assets/invisible_wall.png');
-        /*$*/this.load.image('invisible_wall_rotated', './assets/invisible_wall_rotated.png');
-        /*$*/this.load.image('zombie', './assets/zombie_placeholder.png');
-        /*$*/this.load.image('magic_missile', './assets/magic_missile_placeholder.png');
-        /*$*/this.load.image('magic_missile_blast', './assets/magic_missile_blast_placeholder.png');
-        /*$*/this.load.image('orc_punch', './assets/orc_punch_placeholder.png');
+
+        //player images
+        this.load.image('player', './assets/orc_monk.png');
+
+        //attack images
+
+        //obstacle images
+        this.load.image('rock', './assets/rock_1.png');
+        this.load.image('stalagmite', './assets/stalagmite_1.png');
+        this.load.image('dirt_wall', './assets/dirt_wall_1.png');
+        this.obstacleList = ['rock', 'stalagmite', 'dirt_wall'];
+
+        //enemy images
+        this.load.image('zombie', './assets/zombie.png');
     }
 
     //placing scene objects before game start
@@ -62,7 +76,7 @@ class Play extends Phaser.Scene{
     //called once a frame
     update(){
         //background scrolling
-        this.background.tilePositionY -= 0.5;
+        this.background.tilePositionY -= .75;
 
         //game functionality
         if(!this.gameOver){
@@ -72,12 +86,13 @@ class Play extends Phaser.Scene{
     }
 
     createObstacle(){
+        let obstacle = this.obstacleList[Phaser.Math.Between(0, this.obstacleList.length-1)];
         if(!this.gameOver && !this.obstacleGroup.isFull()){
             this.obstacleGroup.add(new Obstacle(
                 this,                                   //scene
                 Phaser.Math.Between(0, config.width),   //x
                 -32,                                    //y
-                'obstacle'                              //sprite
+                obstacle                                //sprite
                 )
             );
         }
@@ -108,9 +123,9 @@ class Play extends Phaser.Scene{
             active: true,
             runChildUpdate: false
         }).addMultiple([
-            this.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable(),
-            this.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable(),
-            this.physics.add.sprite(config.width/2, (config.height/3)-50, 'invisible_wall_rotated').setImmovable()
+            this.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
+            this.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
+            this.physics.add.sprite(config.width/2, (config.height/3)-50, 'invisible_wall_rotated').setImmovable().setVisible(false)
         ]);
         
         //creating the group to hold all the obstacles
