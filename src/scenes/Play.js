@@ -82,6 +82,10 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             //entity updating
             this.player.update();
+        }else{
+            if(keyQ.isDown){
+                this.scene.restart();
+            }
         }
     }
 

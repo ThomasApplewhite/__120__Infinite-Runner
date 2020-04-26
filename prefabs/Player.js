@@ -83,6 +83,7 @@ class Player extends Phaser.GameObjects.Sprite{
         console.log("You lose!");
         console.log("Score: " + this.score);
         console.log("Distance: " + this.distance);
+        console.log("Press Q to Restart");
         this.scene.gameOver = true;
     }
 
