@@ -15,6 +15,7 @@ class Play extends Phaser.Scene{
         /*$*/this.load.image('zombie', './assets/zombie_placeholder.png');
         /*$*/this.load.image('magic_missile', './assets/magic_missile_placeholder.png');
         /*$*/this.load.image('magic_missile_blast', './assets/magic_missile_blast_placeholder.png');
+        /*$*/this.load.image('orc_punch', './assets/orc_punch_placeholder.png');
     }
 
     //placing scene objects before game start

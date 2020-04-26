@@ -10,6 +10,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.moveDown       =   keyDOWN;
         this.moveLeft       =   keyLEFT;
         this.moveRight      =   keyRIGHT;
+        this.normalAttack   =   keyQ;
         this.specialAttack  =   keyE;
         //player properties
         this.stunned = false;
@@ -18,6 +19,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.score = 0;
         this.distance = 0;
         //attack cooldowns
+        this.canNormal = true;
         this.canSpecial = true;
     }
 
@@ -44,6 +46,10 @@ class Player extends Phaser.GameObjects.Sprite{
         }
         else{
             this.body.setVelocityY(0);
+        }
+
+        if(!this.stunned && this.normalAttack.isDown){
+            this.punchAttack();
         }
 
         if(!this.stunned && this.specialAttack.isDown){
@@ -80,6 +86,32 @@ class Player extends Phaser.GameObjects.Sprite{
         this.scene.gameOver = true;
     }
 
+    punchAttack(){
+        if(this.canNormal){
+            //PUNCH HIM
+            this.scene.attackGroup.add(new OrcPunch(
+                this.scene,
+                this.x+16,
+                this.y-16,
+                'orc_punch',
+                0,
+                1               //the damage of the punch
+                )
+            );
+            //start cooldown
+            this.canNormal = false;
+            this.scene.time.addEvent({
+                delay: 500,     //total time before next punch is 30 frames i.e. half a second
+                callback: function(){
+                    this.canNormal = true;
+                    console.log("PUNCH ready!");
+                },
+                callbackScope: this,
+                loop: false
+            });
+        }
+    }
+
     magicMissileAttack(){
         if(this.canSpecial){
             //create magic missile
@@ -101,15 +133,10 @@ class Player extends Phaser.GameObjects.Sprite{
                     this.canSpecial = true;
                     console.log("Magic Missle ready!");
                 },
+                //args: [],
                 callbackScope: this,
                 loop: false
-                //args: [],
-                //callbackScope: this,
-            })
+            });
         }
-    }
-
-    punchAttack(){
-
     }
 }
