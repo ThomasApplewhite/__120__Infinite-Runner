@@ -70,13 +70,21 @@ class Play extends Phaser.Scene{
             createMultipleCallback: null    //what to do when multiple objects are added to the group
         });
 
-        //creating the group to hold all the enmies
+        //creating the group to hold all the enemies
         this.enemyGroup = this.add.group({
             classType: Phaser.GameObjects.Sprite.Enemy,
             active: true,
             maxSize: 5,
             runChildUpdate: true
         });
+
+        //creating the group to hold all the attacks
+        this.attackGroup = this.add.group({
+            classType: Phaser.GameObjects.Sprite,
+            active: true,
+            maxSize: -1,
+            runChildUpdate: true
+        })
 
         //obstacle spawning timer
         this.obstacleSpawnTimer = this.time.addEvent({
@@ -103,6 +111,15 @@ class Play extends Phaser.Scene{
         this.physics.add.collider(this.player, this.enemyGroup, function(player, enemy){
             enemy.onAttack(player);
         });
+            //bUt tHOMAs tHiS Is AN oVeRlAP!!!1!111!! fuck outta here
+            //fuck outta here colliders are ineffective
+        this.physics.add.overlap(this.attackGroup, this.enemyGroup, function(attack, enemy){
+            attack.strike(enemy);
+        })
+        this.physics.add.overlap(this.attackGroup, this.obstacleGroup, function(attack, enemy){
+            //to simulate that it has struck nothing
+            attack.strike(null);
+        })
         //creating colliders for things that just need to collide
         this.physics.add.collider(this.player, this.invisibleWallsGroup);
         this.physics.add.collider(this.enemyGroup, this.obstacleGroup);

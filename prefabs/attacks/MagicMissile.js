@@ -1,49 +1,46 @@
-class MagicMissile extends Phaser.GameObjects.Sprite{
+class MagicMissile extends Attack{
     constructor(scene, x, y, texture, frame, range){
         super(scene, x, y, texture, frame);
 
-        this.scene.add.existing(this);
-        this.scene.physics.add.existing(this);
-
-        //this is here because detonate() can get its scope confused a lot
-        this.me = this
+        //properties
         this.range = range;
         this.damage = 5;
         this.body.setVelocityY(-300);
-        console.log(this.body);
+
+        //add to collision group
+        //console.log(this.body);
 
         //I'd really like to group these two together but uhhhh
-        this.missileCheckingEnemies = this.scene.physics.add.collider(this, this.scene.enemyGroup, this.detonate);
-        this.missileCheckingObstacles = this.scene.physics.add.collider(this, this.scene.obstacleGroup, this.detonate);
+        /*this.missileCheckingEnemies = this.scene.physics.add.collider(this, this.scene.enemyGroup, this.detonate);
+        this.missileCheckingObstacles = this.scene.physics.add.collider(this, this.scene.obstacleGroup, this.detonate);*/
     }
 
-    update(){
-        if(this.y < this.y - 100){
-            this.detonate();
+    strike(target){
+        //stop
+        this.body.setVelocityY(0);
+        //become invisible
+        this.setVisible(false);
+        //create the blast
+        this.scene.attackGroup.add(new MagicMissileBlast(
+            this.scene, 
+            this.x, 
+            this.y, 
+            'magic_missile_blast', 
+            0, 
+            this.damage
+            )
+        );
+        //cease to be
+        this.removeSelf();
+    }
+
+    movementPattern(){
+        if(this.y < this.y - this.range){
+            this.strike(this);
         }
 
         if(this.y < 0){
             this.removeSelf();
         }
-    }
-
-    detonate(){
-        //stop
-        console.log(me);
-        console.log(me.body);
-        //this.body.setVelocityY(0);        this one's being weird
-        //become invisible
-        //this.setVisible(false);           this one's being weird
-        //create the blast
-        new MagicMissileBlast(me.scene, me.x, me.y, 'magic_missile_blast', 0, me.damage);
-        //cease to be
-        this.removeSelf();
-    }
-
-    removeSelf(){
-        //this.missileCheckingEnemies.destroy();
-        //this.missileCheckingObstacles.destroy();
-        console.log("removing self");
-        this.destroy();
     }
 }

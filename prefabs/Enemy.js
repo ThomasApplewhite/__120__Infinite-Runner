@@ -15,7 +15,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
         if(this.health <= 0){
             this.onDeath();
-            scene.player.score += this.points;
+            this.scene.player.score += this.points;
             this.destroy();
         }
 

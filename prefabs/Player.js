@@ -83,12 +83,26 @@ class Player extends Phaser.GameObjects.Sprite{
     magicMissileAttack(){
         if(this.canSpecial){
             //create magic missile
-            new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
+            //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
+            this.scene.attackGroup.add(new MagicMissile(
+                this.scene, 
+                this.x+16, 
+                this.y-16, 
+                'magic_missile', 
+                0, 
+                400
+                )
+            );
             //start cooldown
             this.canSpecial = false;
-            this.scene.time.delayedCall({
+            this.scene.time.addEvent({
                 delay: 4000,
-                callback: function(){this.canSpecial = true;},
+                callback: function(){
+                    this.canSpecial = true;
+                    console.log("Magic Missle ready!");
+                },
+                callbackScope: this,
+                loop: false
                 //args: [],
                 //callbackScope: this,
             })

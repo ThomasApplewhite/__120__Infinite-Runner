@@ -15,7 +15,7 @@ class Obstacle extends Phaser.GameObjects.Sprite{
     update(){
         this.movementPattern();
         //destroys the obstacle if it exits the screen.
-        if(this.y > game.config.height - 100){
+        if(this.y > game.config.height){
             this.destroy();
         }
     }
