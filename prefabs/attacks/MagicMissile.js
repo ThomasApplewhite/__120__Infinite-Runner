@@ -3,7 +3,7 @@ class MagicMissile extends Attack{
         super(scene, x, y, texture, frame);
 
         //properties
-        this.range = range;
+        this.range = this.y - range;
         this.damage = 5;
         this.body.setVelocityY(-300);
 
@@ -35,8 +35,8 @@ class MagicMissile extends Attack{
     }
 
     movementPattern(){
-        if(this.y < this.y - this.range){
-            this.strike(this);
+        if(this.y < this.range){
+            this.strike(null);
         }
 
         if(this.y < 0){

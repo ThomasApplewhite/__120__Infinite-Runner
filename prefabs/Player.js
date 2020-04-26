@@ -37,10 +37,10 @@ class Player extends Phaser.GameObjects.Sprite{
 
         //up-down movement
         if(!this.stunned && this.moveUp.isDown){
-            this.body.setVelocityY(-this.speed);
+            this.body.setVelocityY(-this.speed * 1/2);
         }
         else if(!this.stunned && this.moveDown.isDown){
-            this.body.setVelocityY(this.speed);
+            this.body.setVelocityY(this.speed * 3/2);
         }
         else{
             this.body.setVelocityY(0);
@@ -90,7 +90,7 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.y-16, 
                 'magic_missile', 
                 0, 
-                400
+                300             //the range of the missile
                 )
             );
             //start cooldown
