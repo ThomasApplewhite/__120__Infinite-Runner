@@ -173,7 +173,7 @@ class Play extends Phaser.Scene{
         
         //enemy spawning timer
         this.enemySpawnTimer = this.time.addEvent({
-            delay: 500,
+            delay: 750,
             callback: this.createEnemy,
             //args: [],
             callbackScope: this,
