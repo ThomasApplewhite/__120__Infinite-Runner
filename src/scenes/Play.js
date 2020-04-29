@@ -82,10 +82,6 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             //entity updating
             this.player.update();
-        }else{
-            if(keyQ.isDown){
-                this.scene.restart();
-            }
         }
     }
 
@@ -117,6 +113,13 @@ class Play extends Phaser.Scene{
         }
     }
 
+    finishGame(){
+        let scores = this.player.exportScores();
+        game.registry.set("score", scores[0]);
+        game.registry.set("distance", scores[1]);
+        game.registry.set("bodyCount", scores[2]);
+        this.scene.start("endScene");
+    }
 
     //And now, a whole bunch of loading methods. Might just do this in a different file... nah...
     defineGroups(){
@@ -183,7 +186,7 @@ class Play extends Phaser.Scene{
 
     defineColliders(){
         this.physics.add.collider(this.player, this.obstacleGroup, function(player){
-            player.startStun();
+            player.startStun(250);
         });
         this.physics.add.collider(this.player, this.enemyGroup, function(player, enemy){
             enemy.onAttack(player);

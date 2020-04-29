@@ -4,20 +4,28 @@ Header Commend Goes Here
 
 let config = {
     type: Phaser.CANVAS,
-    width: 800,
-    height: 600,
-    scene: [ Menu, Play ],
+    width: 1024,
+    height: 768,
+    scene: [ Menu, Play, End ],
     physics:{
         default: "arcade",
         arcade:{
             debug: false
         }
+    },
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH
     }
 }
 
 let game = new Phaser.Game(config);
 game.settings = {
 }
+
+//defining registry values
+game.registry.set("score", 0);
+game.registry.set("distance", 0);
+game.registry.set("bodyCount", 0);
 
 //reserving keyboard keys
 let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE;

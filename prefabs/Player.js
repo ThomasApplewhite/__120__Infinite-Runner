@@ -16,6 +16,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.stunned = false;
         this.immune = false;
         this.speed = 250;
+        this.bodyCount = 0;
         this.score = 0;
         this.distance = 0;
         //attack cooldowns
@@ -63,16 +64,16 @@ class Player extends Phaser.GameObjects.Sprite{
     }
 
     //stuns the player for 1 second
-    startStun(){
+    startStun(stunTime){
         if(!this.stunned && !this.immune){
             console.log("You've been stunned!");
             this.stunned = true;
-            this.scene.time.delayedCall(250, () => {
+            this.scene.time.delayedCall(stunTime, () => {
                 this.stunned = false;
                 this.immune = true;
                 console.log("Now you're immune!");
             }, null, this);
-            this.scene.time.delayedCall(500, () => {
+            this.scene.time.delayedCall(stunTime * 2, () => {
                 this.immune = false;
             })
         }
@@ -80,11 +81,13 @@ class Player extends Phaser.GameObjects.Sprite{
 
     defeat(){
         this.stunned = true;
-        console.log("You lose!");
+        /*console.log("You lose!");
         console.log("Score: " + this.score);
         console.log("Distance: " + this.distance);
-        console.log("Press Q to Restart");
+        console.log("Body Count: " + this.bodyCount);
+        console.log("Press Q to Restart");*/
         this.scene.gameOver = true;
+        this.scene.time.delayedCall(1000, this.scene.finishGame());
     }
 
     punchAttack(){
@@ -139,5 +142,10 @@ class Player extends Phaser.GameObjects.Sprite{
                 loop: false
             });
         }
+    }
+
+    exportScores(){
+        let scores = new Array(this.score, this.distance, this.bodyCount);
+        return scores;
     }
 }

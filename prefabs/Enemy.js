@@ -42,6 +42,6 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
     //anything special that happens when the enemy dies
     onDeath(){
-
+        ++this.scene.player.bodyCount;
     }
 }
