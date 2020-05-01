@@ -13,6 +13,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.normalAttack   =   keyQ;
         this.specialAttack  =   keyE;
         //player properties
+        this.lives = 3;
         this.stunned = false;
         this.immune = false;
         this.speed = 250;
@@ -79,8 +80,20 @@ class Player extends Phaser.GameObjects.Sprite{
         }
     }
 
+    takeDamage(){
+        if(!this.stunned && !this.immune){
+            this.lives -= 1;
+            if(this.lives > 0){
+                this.startStun(250);
+            }else{
+                this.defeat();
+            }
+        }
+    }
+
     defeat(){
         this.stunned = true;
+        this.setVisible(false);
         /*console.log("You lose!");
         console.log("Score: " + this.score);
         console.log("Distance: " + this.distance);

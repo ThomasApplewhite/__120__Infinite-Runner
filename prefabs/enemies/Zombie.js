@@ -23,6 +23,6 @@ class Zombie extends Enemy{
     //what happens when the enemy collides with the player
     //  other forms of attack should go in attackPattern
     onAttack(player){
-        player.startStun(250);
+        player.takeDamage();
     }
 }
