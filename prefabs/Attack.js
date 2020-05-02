@@ -4,6 +4,8 @@ class Attack extends Phaser.GameObjects.Sprite{
         
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+
+        //this.effected = new Array();
     }
 
     update(){

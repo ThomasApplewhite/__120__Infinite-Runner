@@ -93,13 +93,14 @@ class Play extends Phaser.Scene{
             this.player.update();
 
             //check to spawn boss
-            if(!this.bossActive && this.killsUntilBoss < this.player.bodyCount){
+            if(!this.bossActive && this.killsUntilBoss <= this.player.bodyCount){
                 this.enemyGroup.add(new SkeletonKnightBoss(
                     this,                                   //scene
                     config.width/2,                         //x
                     -100,                                    //y
                     'skeleton_knight_boss',                   //sprite
                     0,                                      //start frame of anim
+                    this.bossLevel
                     )
                 );
             }

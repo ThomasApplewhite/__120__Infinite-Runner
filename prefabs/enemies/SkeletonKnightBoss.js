@@ -4,6 +4,9 @@ class SkeletonKnightBoss extends Enemy{
 
         this.attackTimer;
         this.level = level;
+        if(this.level > 3){
+            this.level = 3;
+        }
 
         this.scene.obstacleSpawnTimer.paused = true;
         this.scene.enemySpawnTimer.paused = true;
@@ -15,7 +18,7 @@ class SkeletonKnightBoss extends Enemy{
         this.scene.physics.moveTo(this, config.width/2, 100, 125);
         //this.body.setVelocityY(0);
 
-        console.log("Boss Level: " + this.level);
+        //console.log("Boss Level: " + this.level);
     }
 
     //how the enemy will specificly attack, if at all
@@ -46,24 +49,23 @@ class SkeletonKnightBoss extends Enemy{
         this.scene.player.score += this.points;
 
         //update boss scene variables
-        this.scene.killsUntilBoss = this.scene.player.bodyCount + 15;
-        //++this.bossLevel;
-        this.bossLevel = true;
+        ++this.scene.bossLevel;                                        //should start at 1
+        this.scene.killsUntilBoss = this.scene.player.bodyCount + 15;   //should be at 15
+        this.scene.bossActive = false;
 
         this.scene.obstacleSpawnTimer.paused = false;
         this.scene.enemySpawnTimer.paused = false;
 
         this.attackTimer.remove();
+
+        console.log("Kills to boss: " + this.scene.killsUntilBoss);
     }
 
     pickAttack(){
         console.log("SkeletonKnight Health:" + this.health);
-        if(this.level > 3){
-            this.level = 3;
-        }
-        
-        
-        let attackCall = Phaser.Math.Between(1, 3);
+
+        let attackCall = Phaser.Math.Between(1, this.level);
+
         console.log("Attack Calling: " + attackCall);
         
         if(attackCall == 3){
