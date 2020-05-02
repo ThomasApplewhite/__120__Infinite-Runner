@@ -15,7 +15,6 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
         if(this.health <= 0){
             this.onDeath();
-            this.scene.player.score += this.points;
             this.destroy();
         }
 
@@ -43,5 +42,6 @@ class Enemy extends Phaser.GameObjects.Sprite{
     //anything special that happens when the enemy dies
     onDeath(){
         ++this.scene.player.bodyCount;
+        this.scene.player.score += this.points;
     }
 }

@@ -35,7 +35,7 @@ class Player extends Phaser.GameObjects.Sprite{
         else if(!this.stunned && this.moveRight.isDown){
             this.body.setVelocityX(this.speed);
         }
-        else{
+        else if(!this.stunned){
             this.body.setVelocityX(0);
         }
 
@@ -46,7 +46,7 @@ class Player extends Phaser.GameObjects.Sprite{
         else if(!this.stunned && this.moveDown.isDown){
             this.body.setVelocityY(this.speed * 3/2);
         }
-        else{
+        else if(!this.stunned){
             this.body.setVelocityY(0);
         }
 

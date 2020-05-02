@@ -13,22 +13,6 @@ class MagicMissileBlast extends Attack{
             loop: false
             }
         )
-
-        //this will be ugly because this object does one thing and then dies
-        /*this.blastChecking = this.scene.physics.add.collider(this.scene.enemyGroup, this, function(enemy){
-            enemy.health -= damage;
-        });*/
-        /*console.log("creating blast");
-        this.scene.time.delayedCall({
-            delay: 250,
-            callback: function(){
-                console.log("destroying blast");
-                this.blastChecking.destroy();
-                this.destroy();
-            },
-            //args []
-            callbackScope: this
-        });*/
     }
 
     strike(target){

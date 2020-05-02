@@ -13,6 +13,10 @@ class Play extends Phaser.Scene{
         /*$*/this.load.image('magic_missile', './assets/placeholders/magic_missile_placeholder.png');
         /*$*/this.load.image('magic_missile_blast', './assets/placeholders/magic_missile_blast_placeholder.png');
         /*$*/this.load.image('orc_punch', './assets/placeholders/orc_punch_placeholder.png');
+        /*$*/this.load.image('skeleton_knight_boss', './assets/placeholders/skeleton_knight_boss_placeholder.png');
+        /*$*/this.load.image('dominating_strike', './assets/placeholders/dominating_strike_placeholder.png');
+        /*$*/this.load.image('sweeping_strike', './assets/placeholders/sweeping_strike_placeholder.png');
+        /*$*/this.load.image('lashing_strike', './assets/placeholders/lashing_strike_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/dirt.png');
@@ -71,6 +75,11 @@ class Play extends Phaser.Scene{
         
         //game-over flag
         this.gameOver = false;
+
+        //boss-spawning variables
+        this.bossLevel = 3;         //should start at 1
+        this.killsUntilBoss = 3;    //should start at 15
+        this.bossActive = false;
     }
 
     //called once a frame
@@ -82,6 +91,18 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             //entity updating
             this.player.update();
+
+            //check to spawn boss
+            if(!this.bossActive && this.killsUntilBoss < this.player.bodyCount){
+                this.enemyGroup.add(new SkeletonKnightBoss(
+                    this,                                   //scene
+                    config.width/2,                         //x
+                    -100,                                    //y
+                    'skeleton_knight_boss',                   //sprite
+                    0,                                      //start frame of anim
+                    )
+                );
+            }
         }
     }
 
@@ -106,8 +127,6 @@ class Play extends Phaser.Scene{
                 -32,                                    //y
                 'zombie',                               //sprite
                 0,                                      //start frame of anim
-                1,                                      //HP
-                10                                      //points
                 )
             );
         }
@@ -132,7 +151,7 @@ class Play extends Phaser.Scene{
         }).addMultiple([
             this.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
             this.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
-            this.physics.add.sprite(config.width/2, (config.height/3)-50, 'invisible_wall_rotated').setImmovable().setVisible(false)
+            //this.physics.add.sprite(config.width/2, (config.height/3)-50, 'invisible_wall_rotated').setImmovable().setVisible(false)
         ]);
         
         //creating the group to hold all the obstacles
@@ -164,6 +183,7 @@ class Play extends Phaser.Scene{
             runChildUpdate: true
         });        
     }
+
     defineSpawnTimers(){
         //obstacle spawning timer
         this.obstacleSpawnTimer = this.time.addEvent({
@@ -199,6 +219,10 @@ class Play extends Phaser.Scene{
         this.physics.add.overlap(this.attackGroup, this.obstacleGroup, function(attack, enemy){
             //to simulate that it has struck nothing
             attack.strike(null);
+        })
+        this.physics.add.overlap(this.attackGroup, this.player, function(attack, player){
+            //to simulate that it has struck nothing
+            attack.strike(player);
         })
         //creating colliders for things that just need to collide
         this.physics.add.collider(this.player, this.invisibleWallsGroup);

@@ -1,6 +1,6 @@
 class Zombie extends Enemy{
-    constructor(scene, x, y, texture, frame, health, points){
-        super(scene, x, y, texture, frame, health, points);
+    constructor(scene, x, y, texture, frame){
+        super(scene, x, y, texture, frame, 1, 10);
 
         this.speed = 250;
         this.body.setBounce(0, 0);
