@@ -77,8 +77,8 @@ class Play extends Phaser.Scene{
         this.gameOver = false;
 
         //boss-spawning variables
-        this.bossLevel = 3;         //should start at 1
-        this.killsUntilBoss = 3;    //should start at 15
+        this.bossLevel = 1;         //should start at 1
+        this.killsUntilBoss = 15;    //should start at 15
         this.bossActive = false;
     }
 
