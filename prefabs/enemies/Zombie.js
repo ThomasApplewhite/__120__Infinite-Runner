@@ -25,4 +25,8 @@ class Zombie extends Enemy{
     onAttack(player){
         player.takeDamage();
     }
+
+    onDamage(damage){
+        this.health -= damage;
+    }
 }

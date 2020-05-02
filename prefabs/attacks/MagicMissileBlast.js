@@ -18,7 +18,8 @@ class MagicMissileBlast extends Attack{
     strike(target){
         if(target != null){
             console.log("Blast has hit something");
-            target.onDamage(this.damage);
+            //target.onDamage(this.damage);
+            target.health -= this.damage;
         }
     }
 }

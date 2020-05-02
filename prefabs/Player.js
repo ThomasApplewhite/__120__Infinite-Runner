@@ -22,7 +22,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.distance = 0;
         //attack cooldowns
         this.canNormal = true;
-        this.canSpecial = true;
+        this.canSpecial = 3;
     }
 
     update(){
@@ -130,7 +130,7 @@ class Player extends Phaser.GameObjects.Sprite{
     }
 
     magicMissileAttack(){
-        if(this.canSpecial){
+        if(this.canSpecial >= 3){
             //create magic missile
             //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
             this.scene.attackGroup.add(new MagicMissile(
@@ -143,8 +143,8 @@ class Player extends Phaser.GameObjects.Sprite{
                 )
             );
             //start cooldown
-            this.canSpecial = false;
-            this.scene.time.addEvent({
+            this.canSpecial = 0;
+            /*this.scene.time.addEvent({
                 delay: 4000,
                 callback: function(){
                     this.canSpecial = true;
@@ -153,7 +153,7 @@ class Player extends Phaser.GameObjects.Sprite{
                 //args: [],
                 callbackScope: this,
                 loop: false
-            });
+            });*/
         }
     }
 

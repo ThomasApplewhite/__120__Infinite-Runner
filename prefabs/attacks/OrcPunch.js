@@ -16,7 +16,9 @@ class OrcPunch extends Attack{
     strike(target){
         if(target !== null){
             console.log("Punch has hit something");
+            //target.onDamage(this.damage);
             target.health -= this.damage;
+            ++this.scene.player.canSpecial;
         }
     }
 
