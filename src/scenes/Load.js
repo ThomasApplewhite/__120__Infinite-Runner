@@ -68,6 +68,8 @@ class Load extends Phaser.Scene{
         this.load.audio('magic_missile_explosionSound', './assets/sounds/Magic Missile Explosion.mp3');
         this.load.audio('magic_missile_firingSound', './assets/sounds/Magic Missile Firing.mp3');
         this.load.audio('punchSound', './assets/sounds/Punch.mp3');
+        //this.load.audio('spooky', './assets/sounds/Spooky.mp3');
+
         this.add.text(100, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
         this.add.text(100, this.textSpace, "Generating animations...", this.textConfig);
@@ -101,7 +103,7 @@ class Load extends Phaser.Scene{
 
         this.anims.create({
             key: 'orc_walkAnim',
-            frameRate: 5,
+            frameRate: 10,
             frames: this.anims.generateFrameNames('player', {
                 start: 1,
                 end: 8,
@@ -117,6 +119,9 @@ class Load extends Phaser.Scene{
             callback: () => {this.scene.start("menuScene");},
             loop: false,
         });
+        
+        //this.spook = this.sound.add('spooky');
+        //this.spook.play();
     }
 
     update(){
