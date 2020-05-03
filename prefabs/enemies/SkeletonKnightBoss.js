@@ -1,6 +1,6 @@
 class SkeletonKnightBoss extends Enemy{
     constructor(scene, x, y, texture, frame, level){
-        super(scene, x, y, texture, frame, 100, 100);
+        super(scene, x, y, texture, frame, 500, 100);
 
         this.attackTimer;
         this.level = level;
