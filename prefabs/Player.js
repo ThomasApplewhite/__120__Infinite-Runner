@@ -54,9 +54,9 @@ class Player extends Phaser.GameObjects.Sprite{
             this.body.setVelocityY(0);
         }
 
-        if(this.body.speed == 0 && this.anims.getCurrentKey() == 'orc_walkAnim'){
+        /*if(this.body.speed == 0 && this.anims.getCurrentKey() == 'orc_walkAnim'){
             this.anims.stop();
-        }
+        }*/
 
         if(!this.stunned && this.normalAttack.isDown){
             this.punchAttack();
