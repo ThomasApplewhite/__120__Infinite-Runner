@@ -22,10 +22,16 @@ let game = new Phaser.Game(config);
 game.settings = {
 }
 
+//setting magic missile particle emitter
+/*let mmParticleConfig = {
+
+}*/
+
 //defining registry values
 game.registry.set("score", 0);
 game.registry.set("distance", 0);
 game.registry.set("bodyCount", 0);
+//game.registry.set("magicMissileParticle", mmParticleConfig);
 
 //reserving keyboard keys
 let keyLEFT, keyRIGHT, keyUP, keyDOWN, keyQ, keyE;

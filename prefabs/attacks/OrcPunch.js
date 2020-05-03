@@ -5,6 +5,8 @@ class OrcPunch extends Attack{
         this.damage = damage;
         this.body.setImmovable();
 
+        this.scene.punchSFX.play();
+
         this.scene.time.addEvent({
             delay: 1/3 * 1000,       //active for 20 frames (1/3 of a second)
             callback: this.removeSelf,

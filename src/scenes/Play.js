@@ -5,35 +5,7 @@ class Play extends Phaser.Scene{
     
     //for loading assets
     preload(){
-        //placeholder images
-        //Lines with a /*$*/ are still usimg placeholder assets
-        /*$*/this.load.image('obstacle', './assets/placeholders/obstacle_placeholder.png');
-        /*$*/this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
-        /*$*/this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');      
-        /*$*/this.load.image('magic_missile', './assets/placeholders/magic_missile_placeholder.png');
-        /*$*/this.load.image('magic_missile_blast', './assets/placeholders/magic_missile_blast_placeholder.png');
-        /*$*/this.load.image('orc_punch', './assets/placeholders/orc_punch_placeholder.png');
-        /*$*/this.load.image('skeleton_knight_boss', './assets/placeholders/skeleton_knight_boss_placeholder.png');
-        /*$*/this.load.image('dominating_strike', './assets/placeholders/dominating_strike_placeholder.png');
-        /*$*/this.load.image('sweeping_strike', './assets/placeholders/sweeping_strike_placeholder.png');
-        /*$*/this.load.image('lashing_strike', './assets/placeholders/lashing_strike_placeholder.png');
-
-        //background images
-        this.load.image('backgroundTile', './assets/dirt.png');
-
-        //player images
-        this.load.image('player', './assets/orc_monk.png');
-
-        //attack images
-
-        //obstacle images
-        this.load.image('rock', './assets/rock_1.png');
-        this.load.image('stalagmite', './assets/stalagmite_1.png');
-        this.load.image('dirt_wall', './assets/dirt_wall_1.png');
         this.obstacleList = ['rock', 'stalagmite', 'dirt_wall'];
-
-        //enemy images
-        this.load.image('zombie', './assets/zombie.png');
     }
 
     //placing scene objects before game start
@@ -53,8 +25,13 @@ class Play extends Phaser.Scene{
             config.width/2, 
             config.height/2, 
             'backgroundTile'
-            ).setOrigin(0, 0).setScale(5.625);
+        ).setOrigin(0, 0).setScale(5.625);
         
+        //creating particle manager
+
+        //creating sounds
+        this.punchSFX = this.sound.add('punchSound');
+
         //creating the player
         this.player = new Player(
             this, 
@@ -138,7 +115,14 @@ class Play extends Phaser.Scene{
         game.registry.set("score", scores[0]);
         game.registry.set("distance", scores[1]);
         game.registry.set("bodyCount", scores[2]);
-        this.scene.start("endScene");
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                this.scene.start("endScene");
+            },
+            callbackScope: this,
+            loop: false
+        });
     }
 
     //And now, a whole bunch of loading methods. Might just do this in a different file... nah...

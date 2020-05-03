@@ -1,0 +1,15 @@
+back_punch1,0,0,64,64
+back_punch2,0,64,64,64
+back_punch3,64,0,64,64
+back_punch4,64,64,64,64
+back_stun1,0,128,64,64
+back_stun2,64,128,64,64
+back_stun3,128,0,64,64
+back_walk1,128,64,64,64
+back_walk2,128,128,64,64
+back_walk3,0,192,64,64
+back_walk4,64,192,64,64
+back_walk5,128,192,64,64
+back_walk6,192,0,64,64
+back_walk7,192,64,64,64
+back_walk8,192,128,64,64
