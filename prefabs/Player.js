@@ -31,9 +31,11 @@ class Player extends Phaser.GameObjects.Sprite{
         //left-right movement
         if(!this.stunned && this.moveLeft.isDown){
             this.body.setVelocityX(-this.speed);
+            this.walkAnim();
         }
         else if(!this.stunned && this.moveRight.isDown){
             this.body.setVelocityX(this.speed);
+            this.walkAnim();
         }
         else if(!this.stunned){
             this.body.setVelocityX(0);
@@ -42,12 +44,18 @@ class Player extends Phaser.GameObjects.Sprite{
         //up-down movement
         if(!this.stunned && this.moveUp.isDown){
             this.body.setVelocityY(-this.speed * 1/2);
+            this.walkAnim();
         }
         else if(!this.stunned && this.moveDown.isDown){
             this.body.setVelocityY(this.speed * 3/2);
+            this.walkAnim();
         }
         else if(!this.stunned){
             this.body.setVelocityY(0);
+        }
+
+        if(this.body.speed == 0 && this.anims.getCurrentKey() == 'orc_walkAnim'){
+            this.anims.stop();
         }
 
         if(!this.stunned && this.normalAttack.isDown){
@@ -68,15 +76,17 @@ class Player extends Phaser.GameObjects.Sprite{
     startStun(stunTime){
         if(!this.stunned && !this.immune){
             console.log("You've been stunned!");
+            this.anims.play('orc_stunAnim');
             this.stunned = true;
             this.scene.time.delayedCall(stunTime, () => {
                 this.stunned = false;
                 this.immune = true;
+                this.anims.stop();
                 console.log("Now you're immune!");
             }, null, this);
             this.scene.time.delayedCall(stunTime * 2, () => {
                 this.immune = false;
-            })
+            });
         }
     }
 
@@ -106,6 +116,7 @@ class Player extends Phaser.GameObjects.Sprite{
     punchAttack(){
         if(this.canNormal){
             //PUNCH HIM
+            this.anims.play('orc_punchAnim');
             this.scene.attackGroup.add(new OrcPunch(
                 this.scene,
                 this.x+16,
@@ -160,5 +171,11 @@ class Player extends Phaser.GameObjects.Sprite{
     exportScores(){
         let scores = new Array(this.score, this.distance, this.bodyCount);
         return scores;
+    }
+
+    walkAnim(){
+        if(!this.anims.isPlaying && !this.stunned){
+            this.anims.play('orc_walkAnim');
+        }
     }
 }

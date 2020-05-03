@@ -5,6 +5,7 @@ class Play extends Phaser.Scene{
     
     //for loading assets
     preload(){
+        //helpful array for obstacle generation
         this.obstacleList = ['rock', 'stalagmite', 'dirt_wall'];
     }
 
@@ -38,8 +39,8 @@ class Play extends Phaser.Scene{
             config.width/2, 
             config.height*2/3, 
             'player',
-            0
-            ).setOrigin(0, 0);
+            'back_walk8'
+        ).setOrigin(0, 0);
         
         //creating object groups
         this.defineGroups();
