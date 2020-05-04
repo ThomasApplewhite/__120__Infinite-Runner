@@ -4,6 +4,7 @@ class OrcPunch extends Attack{
 
         this.damage = damage;
         this.body.setImmovable();
+        this.mmGiven = false;
 
         this.scene.punchSFX.play();
 
@@ -20,8 +21,11 @@ class OrcPunch extends Attack{
             console.log("Punch has hit something");
             //target.onDamage(this.damage);
             target.health -= this.damage;
-            ++this.scene.player.canSpecial;
-            this.scene.meterUpdate(this.scene.player.canSpecial);
+            if(!this.mmGiven){
+                ++this.scene.player.canSpecial;
+                this.scene.meterUpdate(this.scene.player.canSpecial);
+                this.mmGiven = true;
+            }
         }
     }
 

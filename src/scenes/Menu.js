@@ -31,7 +31,7 @@ class Menu extends Phaser.Scene{
             config.width/2, 
             config.height/2, 
             'backgroundTile'
-        ).setOrigin(0, 0).setScale(5.625);
+        ).setOrigin(0, 0).setScale(4);
 
         /*//setting background music
         this.music = this.sound.add('bgm');

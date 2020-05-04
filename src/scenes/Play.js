@@ -26,7 +26,7 @@ class Play extends Phaser.Scene{
             config.width/2, 
             config.height/2, 
             'backgroundTile'
-        ).setOrigin(0, 0).setScale(5.625);
+        ).setOrigin(0, 0).setScale(4);
         
         //creating particle manager
 

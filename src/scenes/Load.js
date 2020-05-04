@@ -37,7 +37,7 @@ class Load extends Phaser.Scene{
         /*$*/this.load.image('magic_missile_particle', './assets/placeholders/magic_missile_particle_placeholder.png');
 
         //background images
-        this.load.image('backgroundTile', './assets/dirt.png');
+        this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
 
         
         //player images
