@@ -5,7 +5,7 @@ class Zombie extends Enemy{
         this.speed = 250;
         this.body.setBounce(0, 0);
         this.lunging = false;
-        this.body.setSize(16, 28);
+        this.body.setSize(24, 28);
 
         this.anims.play('zombie_walkAnim');
         this.on('animationcomplete', () => {
