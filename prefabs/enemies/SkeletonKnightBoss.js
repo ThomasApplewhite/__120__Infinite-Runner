@@ -70,7 +70,7 @@ class SkeletonKnightBoss extends Enemy{
     pickAttack(){
         console.log("SkeletonKnight Health:" + this.health);
 
-        let attackCall = 3;//Phaser.Math.Between(1, this.level);
+        let attackCall = Phaser.Math.Between(1, this.level);
 
         console.log("Attack Calling: " + attackCall);
         

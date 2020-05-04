@@ -36,6 +36,6 @@ class OrcPunch extends Attack{
         //unlike most movement, the hitbox here MUST follow the player, 
         //  so its position is directly influenced
         this.x = this.scene.player.x + 32;
-        this.y = this.scene.player.y - 16; //this.playerReference.sourceHeight/4;
+        this.y = this.scene.player.y - 8; //this.playerReference.sourceHeight/4;
     }
 }
