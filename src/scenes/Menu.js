@@ -45,8 +45,9 @@ class Menu extends Phaser.Scene{
             delay: 0
         });
 
-        //listening for up key
+        //listening for up and down key
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
@@ -63,6 +64,21 @@ class Menu extends Phaser.Scene{
 
         this.add.sprite(centerX, game.config.height/4, 'title');
         //this.add.sprite(centerX, game.config.height * 7/8, 'start_button').setScale(2);
+        //credits text
+        this.add.text(game.config.width - 75, game.config.height - 50, 'Press the\n Down Arrow\n for Credits',{
+            fontFamily: 'PermanentMarker',
+            fontSize: '14px',
+            //backgroundColor: '#F3B141',
+            color: '#ff9900',
+            align: 'right',
+            padding: {
+                top: 5,
+                bototm: 5,
+            },
+            stroke: '#000000',
+            strokeThickness: 10,
+            fixedWidth: 0
+        }).setOrigin(0.5);
     }
 
     update(){
@@ -70,6 +86,10 @@ class Menu extends Phaser.Scene{
 
         if(keyUP.isDown){
             this.scene.start("playScene");
+        }
+
+        if(keyDOWN.isDown){
+            this.scene.start("creditsScene");
         }
     }
     

@@ -72,12 +72,24 @@ class Load extends Phaser.Scene{
 
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
-        this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
-        this.textSpace += 20;
-        
     }
 
     create(){
+        /*this.add.text(this.textShift, this.textSpace, "Mapping Controls...", this.textConfig);
+        this.textSpace += 20;
+        //setting keyboard controls
+        keyLEFT  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHT =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyQ     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);   //punch
+        keyE     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);   //magic missile
+        this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
+        this.textSpace += 20;*/
+
+        this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
+        this.textSpace += 20;
+
         //creating animations
         this.anims.create({
             key: 'orc_punchAnim',

@@ -8,7 +8,7 @@ class End extends Phaser.Scene{
         //this.load.image('start_button', './assets/start_button.png');
 
         //background images
-        this.load.image('backgroundTile', './assets/dirt.png');
+        //this.load.image('backgroundTile', './assets/dirt.png');
     }
 
     create(){
@@ -47,6 +47,7 @@ class End extends Phaser.Scene{
             ).setOrigin(0, 0).setScale(5.625);
  
         keyQ    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        keyDOWN  =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
  
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
@@ -64,6 +65,22 @@ class End extends Phaser.Scene{
         textConfig.fontSize = '56px';
         this.add.text(centerX, centerY + 5 * textSpacer, 'Press (Q) to Restart!', textConfig).setOrigin(0.5);
 
+        //credits text
+        this.add.text(game.config.width - 75, game.config.height - 50, 'Press the\n Down Arrow\n for Credits',{
+            fontFamily: 'PermanentMarker',
+            fontSize: '14px',
+            //backgroundColor: '#F3B141',
+            color: '#ff9900',
+            align: 'right',
+            padding: {
+                top: 5,
+                bototm: 5,
+            },
+            stroke: '#000000',
+            strokeThickness: 10,
+            fixedWidth: 0
+        }).setOrigin(0.5);
+
     }
 
     update(){
@@ -71,6 +88,10 @@ class End extends Phaser.Scene{
 
         if(keyQ.isDown){
             this.scene.start("playScene");
+        }
+
+        if(keyDOWN.isDown){
+            this.scene.start("creditsScene");
         }
     }
     
