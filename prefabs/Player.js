@@ -123,8 +123,8 @@ class Player extends Phaser.GameObjects.Sprite{
             this.anims.play('orc_punchAnim');
             this.scene.attackGroup.add(new OrcPunch(
                 this.scene,
-                this.x+16,
-                this.y-16,
+                this.x + 32, //this.body.sourceWidth/2,
+                this.y - 16, //this.body.sourceHeight/2,
                 'orc_punch',
                 0,
                 1               //the damage of the punch

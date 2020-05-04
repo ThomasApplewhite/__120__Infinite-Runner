@@ -230,7 +230,7 @@ class Play extends Phaser.Scene{
     defineSpawnTimers(){
         //obstacle spawning timer
         this.obstacleSpawnTimer = this.time.addEvent({
-            delay: 250,                // ms
+            delay: 500,                // ms
             callback: this.createObstacle,
             //args: [],
             callbackScope: this,

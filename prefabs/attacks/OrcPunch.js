@@ -5,6 +5,8 @@ class OrcPunch extends Attack{
         this.damage = damage;
         this.body.setImmovable();
         this.mmGiven = false;
+        
+        this.body.setSize(64, 16);
 
         this.scene.punchSFX.play();
 
@@ -32,7 +34,7 @@ class OrcPunch extends Attack{
     movementPattern(){
         //unlike most movement, the hitbox here MUST follow the player, 
         //  so its position is directly influenced
-        this.x = this.scene.player.x + 16;
-        this.y = this.scene.player.y - 16;
+        this.x = this.scene.player.x + 32;
+        this.y = this.scene.player.y - 16; //this.playerReference.sourceHeight/4;
     }
 }
