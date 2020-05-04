@@ -147,7 +147,19 @@ class Load extends Phaser.Scene{
 
         this.nextSceneTime = this.time.addEvent({
             delay: 3000,
-            callback: () => {this.scene.start("menuScene");},
+            callback: () => {
+                //setting background music
+                this.music = this.sound.add('bgm');
+                this.music.play({
+                    mute: false,
+                    volume: 1,
+                    rate: 1,
+                    detune: 0,
+                    seek: 0,
+                    loop: true,
+                    delay: 0
+                });
+                this.scene.start("menuScene");},
             loop: false,
         });
         this.nextSceneTime.paused = true;

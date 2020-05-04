@@ -33,7 +33,7 @@ class Menu extends Phaser.Scene{
             'backgroundTile'
         ).setOrigin(0, 0).setScale(5.625);
 
-        //setting background music
+        /*//setting background music
         this.music = this.sound.add('bgm');
         this.music.play({
             mute: false,
@@ -43,7 +43,7 @@ class Menu extends Phaser.Scene{
             seek: 0,
             loop: true,
             delay: 0
-        });
+        });*/
 
         //listening for up and down key
         keyUP    =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
