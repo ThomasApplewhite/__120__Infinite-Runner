@@ -21,6 +21,7 @@ class OrcPunch extends Attack{
             //target.onDamage(this.damage);
             target.health -= this.damage;
             ++this.scene.player.canSpecial;
+            this.scene.meterUpdate(this.scene.player.canSpecial);
         }
     }
 

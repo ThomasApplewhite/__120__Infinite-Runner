@@ -7,11 +7,11 @@ class Load extends Phaser.Scene{
             align: 'left'
         }
         this.textSpace = 20;
-        this.textShift = 100;
+        this.textShift = 20;
     }
 
     preload(){
-        this.add.text(100, this.textSpace, "Loading images...", this.textConfig);
+        this.add.text(this.textShift, this.textSpace, "Loading images...", this.textConfig);
         this.textSpace += 20;
 
         this.load.image('title', './assets/Title_Large.png');
@@ -58,9 +58,9 @@ class Load extends Phaser.Scene{
         this.load.image('zombie', './assets/zombie.png');
 
 
-        this.add.text(100, this.textSpace, "Complete", this.textConfig);
+        this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
-        this.add.text(100, this.textSpace, "Loading audio...", this.textConfig);
+        this.add.text(this.textShift, this.textSpace, "Loading audio...", this.textConfig);
         this.textSpace += 20;
 
         //audio
@@ -70,9 +70,9 @@ class Load extends Phaser.Scene{
         this.load.audio('punchSound', './assets/sounds/Punch.mp3');
         //this.load.audio('spooky', './assets/sounds/Spooky.mp3');
 
-        this.add.text(100, this.textSpace, "Complete", this.textConfig);
+        this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
-        this.add.text(100, this.textSpace, "Generating animations...", this.textConfig);
+        this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
         this.textSpace += 20;
         
     }
@@ -111,7 +111,7 @@ class Load extends Phaser.Scene{
             }),
             repeat: -1
         });
-        this.add.text(100, this.textSpace, "Complete", this.textConfig);
+        this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
 
         this.time.addEvent({

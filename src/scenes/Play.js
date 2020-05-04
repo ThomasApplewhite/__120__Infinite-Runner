@@ -50,6 +50,32 @@ class Play extends Phaser.Scene{
         
         //creating colliders
         this.defineColliders();
+
+        //creating UI
+        this.uiConfig = {
+            fontFamily: 'PermanentMarker',
+            fontSize: '28px',
+            //backgroundColor: '#F3B141',
+            color: '#6ABE30',
+            align: 'left',
+            stroke: '#000000',
+            strokeThickness: 10,
+            fixedWidth: 0
+        }
+        this.meterText = this.add.text(20, 20, "Meters: 0", this.uiConfig)
+        this.meterText.depth = 1;
+        this.uiConfig.color = '#D62109';
+        //this.uiConfig.align = 'right';
+        this.scoreText = this.add.text(20, 60, "Score: 0", this.uiConfig,)
+        this.scoreText.depth = 1;
+        this.magicMissileMeter = [
+            this.add.sprite(game.config.width - 30, 20, 'magic_missile_particle'),
+            this.add.sprite(game.config.width - 30, 40, 'magic_missile_particle'),
+            this.add.sprite(game.config.width - 30, 60, 'magic_missile_particle'),
+        ];
+        this.magicMissileMeter[0].depth = 1;
+        this.magicMissileMeter[1].depth = 1;
+        this.magicMissileMeter[2].depth = 1;
         
         //game-over flag
         this.gameOver = false;
@@ -69,6 +95,7 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             //entity updating
             this.player.update();
+            this.textUpdate();
 
             //check to spawn boss
             if(!this.bossActive && this.killsUntilBoss <= this.player.bodyCount){
@@ -108,6 +135,21 @@ class Play extends Phaser.Scene{
                 0,                                      //start frame of anim
                 )
             );
+        }
+    }
+
+    textUpdate(){
+        this.meterText.setText("Meters: " + this.player.distance);
+        this.scoreText.setText("Score: " + this.player.score);
+    }
+
+    meterUpdate(param){
+        if(param == 0){
+            this.magicMissileMeter[0].visible = false;
+            this.magicMissileMeter[1].visible = false;
+            this.magicMissileMeter[2].visible = false;
+        }else if(param <= 3){
+            this.magicMissileMeter[param-1].visible = true;
         }
     }
 

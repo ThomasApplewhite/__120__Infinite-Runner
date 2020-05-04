@@ -23,6 +23,9 @@ class Player extends Phaser.GameObjects.Sprite{
         //attack cooldowns
         this.canNormal = true;
         this.canSpecial = 3;
+        //animation logic
+        this.walkAnim();
+        this.on('animationcomplete', () => {this.anims.play('orc_walkAnim');}, this);
     }
 
     update(){
@@ -142,6 +145,8 @@ class Player extends Phaser.GameObjects.Sprite{
 
     magicMissileAttack(){
         if(this.canSpecial >= 3){
+            //reset UI
+            this.scene.meterUpdate(0);
             //create magic missile
             //new MagicMissile(this.scene, this.x+16, this.y-16, 'magic_missile', 0, 400)
             this.scene.attackGroup.add(new MagicMissile(
