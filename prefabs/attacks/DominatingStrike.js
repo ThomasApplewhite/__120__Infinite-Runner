@@ -27,7 +27,7 @@ class DominatingStrike extends Attack{
     }
 
     activateMove(){
-        this.setAlpha(1);
+        this.setAlpha(0);
         this.active = true;
         if(this.type == 1){
             this.scene.boss.anims.play('boss_sweepingAnim');

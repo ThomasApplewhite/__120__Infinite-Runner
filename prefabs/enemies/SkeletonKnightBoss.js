@@ -11,8 +11,8 @@ class SkeletonKnightBoss extends Enemy{
         this.scene.obstacleSpawnTimer.paused = true;
         this.scene.enemySpawnTimer.paused = true;
 
-        this.setOrigin(0.5, 0);
-        this.body.setSize(400, 200);
+        //this.setOrigin(0.5, 0);
+        this.body.setSize(169, 172);
 
         this.body.setImmovable();
 
@@ -21,7 +21,7 @@ class SkeletonKnightBoss extends Enemy{
 
         this.scene.bossActive = true;
 
-        this.scene.physics.moveTo(this, config.width/2, -100, 125);
+        this.scene.physics.moveTo(this, config.width/2, 250, 125);
         //this.body.setVelocityY(0);
 
         //console.log("Boss Level: " + this.level);
@@ -43,7 +43,7 @@ class SkeletonKnightBoss extends Enemy{
 
     //I wish there was a better way to do this, but moveTo won's stop anything so...
     movementPattern(){
-        if(this.y >= -100){
+        if(this.y >= 250){
             this.body.setVelocityY(0);
         }
     }
@@ -70,7 +70,7 @@ class SkeletonKnightBoss extends Enemy{
     pickAttack(){
         console.log("SkeletonKnight Health:" + this.health);
 
-        let attackCall = Phaser.Math.Between(1, this.level);
+        let attackCall = 3;//Phaser.Math.Between(1, this.level);
 
         console.log("Attack Calling: " + attackCall);
         
@@ -103,12 +103,12 @@ class SkeletonKnightBoss extends Enemy{
     }
 
     sweepingStrike(){
-        let attack = new DominatingStrike(this.scene, this.x, this.y+452, 'sweeping_strike', 0, 1, this);
+        let attack = new DominatingStrike(this.scene, this.x, this.y+86, 'sweeping_strike', 0, 1, this);
         this.scene.attackGroup.add(attack);
     }
 
     lashingStrike(){
-        let attack = new LashingStrike(this.scene, this.x, this.y+452, 'lashing_strike');
+        let attack = new LashingStrike(this.scene, this.x, this.y+86, 'lashing_strike');
         this.scene.attackGroup.add(attack);
     }
 }

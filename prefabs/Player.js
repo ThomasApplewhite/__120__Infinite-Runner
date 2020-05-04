@@ -5,6 +5,7 @@ class Player extends Phaser.GameObjects.Sprite{
         //add to scene
         scene.add.existing(this);           //add the sprite
         scene.physics.add.existing(this);   //add the physics
+        this.body.setSize(18, 36);
         //set controls
         this.moveUp         =   keyUP;
         this.moveDown       =   keyDOWN;

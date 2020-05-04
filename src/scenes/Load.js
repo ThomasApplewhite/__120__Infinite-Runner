@@ -26,16 +26,11 @@ class Load extends Phaser.Scene{
         //Lines with a /*$*/ are still usimg placeholder assets
         /*$*/this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
         /*$*/this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');      
-        /*$*/this.load.image('skeleton_knight_boss', './assets/placeholders/skeleton_knight_boss_placeholder.png');
-        /*$*/this.load.image('dominating_strike', './assets/placeholders/dominating_strike_placeholder.png');
-        /*$*/this.load.image('sweeping_strike', './assets/placeholders/sweeping_strike_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
-
-        
+  
         //player images
-        //this.load.image('player', './assets/orc_monk.png');
         this.load.atlas({
             key: 'player',
             textureURL: './assets/atlases/orc_monk.png',
@@ -50,11 +45,10 @@ class Load extends Phaser.Scene{
         });
         this.load.image('lashing_strike', './assets/hook.png');
         this.load.image('magic_missile', './assets/missle.png');
+        this.load.image('dominating_strike', './assets/dominating_strike.png');
+        this.load.image('sweeping_strike', './assets/sweeping_strike.png');
 
         //obstacle images
-        /*this.load.image('rock', './assets/rock1.png');
-        this.load.image('stalagmite', './assets/rock2.png');
-        this.load.image('dirt_wall', './assets/dirt_wall_1.png');*/
         this.load.atlas({
             key: 'obstacles',
             textureURL: './assets/atlases/obstacles.png',
@@ -226,8 +220,11 @@ class Load extends Phaser.Scene{
             'Fleeing from misery...',
             'Three distortion guitars...',
             'You’re a cutecumber...',
-            'Never waking up...'
-
+            'Never waking up...',
+            'Dive into the misery...',
+            'A can of zombies...',
+            'Akthoric is coming...',
+            'Skeleton helmet ghost...'
         );
 
         this.nextSceneTime = this.time.addEvent({
