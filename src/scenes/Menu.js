@@ -82,7 +82,7 @@ class Menu extends Phaser.Scene{
     }
 
     update(){
-        this.background.tilePositionY -= .75;
+        this.background.tilePositionY -= 1;
 
         if(keyUP.isDown){
             this.scene.start("playScene");

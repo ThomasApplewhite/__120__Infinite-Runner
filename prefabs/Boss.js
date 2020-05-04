@@ -2,7 +2,6 @@ class Boss extends Enemy{
     constructor(scene, x, y, texture, frame, health, points){
         super(scene, x, y, texture, frame, health, points);
 
-        this.scene.bossLaughtSFX.play();
         this.bossVibes();
     }
 
@@ -10,6 +9,7 @@ class Boss extends Enemy{
     bossVibes(){
         this.scene.obstacleSpawnTimer = false;
         this.scene.enemySpawnTimer.paused = false;
+        this.scene.bossLaughSFX.play();
     }
     
     //anything special that happens when the enemy dies

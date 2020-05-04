@@ -55,38 +55,7 @@ class Play extends Phaser.Scene{
         this.defineColliders();
 
         //creating UI
-        this.uiConfig = {
-            fontFamily: 'PermanentMarker',
-            fontSize: '28px',
-            //backgroundColor: '#F3B141',
-            color: '#6ABE30',
-            align: 'left',
-            stroke: '#000000',
-            strokeThickness: 10,
-            fixedWidth: 0
-        }
-        this.meterText = this.add.text(20, 20, "Meters: 0", this.uiConfig)
-        this.meterText.depth = 1;
-        this.uiConfig.color = '#D62109';
-        //this.uiConfig.align = 'right';
-        this.scoreText = this.add.text(20, 60, "Score: 0", this.uiConfig,)
-        this.scoreText.depth = 1;
-        this.magicMissileMeter = [
-            this.add.sprite(game.config.width - 40, 110, 'magic_missileUI'),
-            this.add.sprite(game.config.width - 110, 110, 'magic_missileUI'),
-            this.add.sprite(game.config.width - 180, 110, 'magic_missileUI'),
-        ];
-        this.magicMissileMeter[0].depth = 1;
-        this.magicMissileMeter[1].depth = 1;
-        this.magicMissileMeter[2].depth = 1;
-        this.heartMeter = [
-            this.add.sprite(game.config.width - 40, 40, 'heartUI'),
-            this.add.sprite(game.config.width - 110, 40, 'heartUI'),
-            this.add.sprite(game.config.width - 180, 40, 'heartUI')
-        ]
-        this.heartMeter[0].depth = 1;
-        this.heartMeter[1].depth = 1;
-        this.heartMeter[2].depth = 1;
+        this.defineUI();
         
         //game-over flag
         this.gameOver = false;
@@ -100,7 +69,7 @@ class Play extends Phaser.Scene{
     //called once a frame
     update(){
         //background scrolling
-        this.background.tilePositionY -= .75;
+        this.background.tilePositionY -= 1;
 
         //game functionality
         if(!this.gameOver){
@@ -194,7 +163,7 @@ class Play extends Phaser.Scene{
         }).addMultiple([
             this.physics.add.sprite(-50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
             this.physics.add.sprite(config.width+50, config.height/2, 'invisible_wall').setImmovable().setVisible(false),
-            //this.physics.add.sprite(config.width/2, (config.height/3)-50, 'invisible_wall_rotated').setImmovable().setVisible(false)
+            this.physics.add.sprite(config.width/2, 149, 'invisible_wall_rotated').setImmovable().setVisible(false)
         ]);
         
         //creating the group to hold all the obstacles
@@ -272,5 +241,40 @@ class Play extends Phaser.Scene{
         this.physics.add.collider(this.enemyGroup, this.obstacleGroup);
         this.physics.add.collider(this.enemyGroup, this.enemyGroup);
         //this.physics.add.collider(this.enemyGroup, this.invisibleWallsGroup);
+    }
+
+    defineUI(){
+        this.uiConfig = {
+            fontFamily: 'PermanentMarker',
+            fontSize: '28px',
+            //backgroundColor: '#F3B141',
+            color: '#6ABE30',
+            align: 'left',
+            stroke: '#000000',
+            strokeThickness: 10,
+            fixedWidth: 0
+        }
+        this.meterText = this.add.text(20, 20, "Meters: 0", this.uiConfig)
+        this.meterText.depth = 1;
+        this.uiConfig.color = '#D62109';
+        //this.uiConfig.align = 'right';
+        this.scoreText = this.add.text(20, 60, "Score: 0", this.uiConfig,)
+        this.scoreText.depth = 1;
+        this.magicMissileMeter = [
+            this.add.sprite(game.config.width - 40, 110, 'magic_missileUI'),
+            this.add.sprite(game.config.width - 110, 110, 'magic_missileUI'),
+            this.add.sprite(game.config.width - 180, 110, 'magic_missileUI'),
+        ];
+        this.magicMissileMeter[0].depth = 1;
+        this.magicMissileMeter[1].depth = 1;
+        this.magicMissileMeter[2].depth = 1;
+        this.heartMeter = [
+            this.add.sprite(game.config.width - 40, 40, 'heartUI'),
+            this.add.sprite(game.config.width - 110, 40, 'heartUI'),
+            this.add.sprite(game.config.width - 180, 40, 'heartUI')
+        ]
+        this.heartMeter[0].depth = 1;
+        this.heartMeter[1].depth = 1;
+        this.heartMeter[2].depth = 1;
     }
 }

@@ -79,6 +79,9 @@ class Load extends Phaser.Scene{
 
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
+
+        this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
+        this.textSpace += 20;
     }
 
     create(){
@@ -96,8 +99,8 @@ class Load extends Phaser.Scene{
 
         keyQ     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
-        this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
-        this.textSpace += 20;
+        /*this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
+        this.textSpace += 20;*/
 
         //creating animations
         this.anims.create({
@@ -140,7 +143,7 @@ class Load extends Phaser.Scene{
             'Prepare for undead...',
             'Opening the pit...',
             'The gates are opening...', 
-            'The Darkworld beckons...',
+            'The DARKWORLD beckons...',
             'Damning your soul...',
             'Raising the dead...',
             'Sealing the pact...',
@@ -148,6 +151,12 @@ class Load extends Phaser.Scene{
             'There’s no salvation...',
             'Hook doesn’t hurt...',
             'Crimson brings pain...',
+            'Delving the cave...',
+            'Fleeing from misery...',
+            'Three distortion guitars...',
+            'You’re a cutecumber...',
+            'Never waking up...'
+
         );
 
         this.nextSceneTime = this.time.addEvent({
