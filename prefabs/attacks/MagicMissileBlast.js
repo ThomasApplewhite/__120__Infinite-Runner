@@ -4,9 +4,10 @@ class MagicMissileBlast extends Attack{
 
         this.damage = damage;
         this.body.setImmovable();
-        //this.body.onOverlap = true;
+        this.body.setSize(160, 160);
 
         this.scene.mmBlastSFX.play();
+        this.anims.play('missle_blastAnim');
 
         this.scene.time.addEvent({
             delay: 250,

@@ -1,9 +1,11 @@
 class DominatingStrike extends Attack{
-    constructor(scene, x, y, texture, frame, type){
+    constructor(scene, x, y, texture, frame, type, boss){
         super(scene, x, y, texture, frame);
 
         this.setAlpha(0.2);
         this.active = false;
+        /*this.boss = boss;
+        console.log(this.boss);*/
 
         //type determines the nature of the attack
         //type 0 = DominatingStrike, type 1 = SweepingStrike
@@ -26,7 +28,13 @@ class DominatingStrike extends Attack{
 
     activateMove(){
         this.setAlpha(1);
-        this.active = true; 
+        this.active = true;
+        if(this.type == 1){
+            this.scene.boss.anims.play('boss_sweepingAnim');
+        }
+        else{
+            this.scene.boss.anims.play('boss_dominatingAnim');
+        }
     }
 
     //what happens when the attack collides with a target

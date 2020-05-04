@@ -11,11 +11,17 @@ class SkeletonKnightBoss extends Enemy{
         this.scene.obstacleSpawnTimer.paused = true;
         this.scene.enemySpawnTimer.paused = true;
 
+        this.setOrigin(0.5, 0);
+        this.body.setSize(400, 200);
+
         this.body.setImmovable();
+
+        this.scene.bossLaughSFX.play();
+        this.on('animationcomplete', () => {this.setTexture('enemies', 'mid_attack1',);}, this);
 
         this.scene.bossActive = true;
 
-        this.scene.physics.moveTo(this, config.width/2, 100, 125);
+        this.scene.physics.moveTo(this, config.width/2, -100, 125);
         //this.body.setVelocityY(0);
 
         //console.log("Boss Level: " + this.level);
@@ -37,7 +43,7 @@ class SkeletonKnightBoss extends Enemy{
 
     //I wish there was a better way to do this, but moveTo won's stop anything so...
     movementPattern(){
-        if(this.y >= 100){
+        if(this.y >= -100){
             this.body.setVelocityY(0);
         }
     }
@@ -91,17 +97,18 @@ class SkeletonKnightBoss extends Enemy{
         else{
             attackSpacer = game.config.width*5/6;
         }
-        let attack = new DominatingStrike(this.scene, attackSpacer, game.config.height/2, 'dominating_strike', 0);
+        
+        let attack = new DominatingStrike(this.scene, attackSpacer, game.config.height/2, 'dominating_strike', 0, this);
         this.scene.attackGroup.add(attack);
     }
 
     sweepingStrike(){
-        let attack = new DominatingStrike(this.scene, this.x, this.y+100, 'sweeping_strike', 0, 1);
+        let attack = new DominatingStrike(this.scene, this.x, this.y+452, 'sweeping_strike', 0, 1, this);
         this.scene.attackGroup.add(attack);
     }
 
     lashingStrike(){
-        let attack = new LashingStrike(this.scene, this.x, this.y+125, 'lashing_strike');
+        let attack = new LashingStrike(this.scene, this.x, this.y+452, 'lashing_strike');
         this.scene.attackGroup.add(attack);
     }
 }

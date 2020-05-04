@@ -6,7 +6,7 @@ class Play extends Phaser.Scene{
     //for loading assets
     preload(){
         //helpful array for obstacle generation
-        this.obstacleList = ['rock', 'stalagmite', 'dirt_wall'];
+        this.obstacleList = ['rock1', 'rock2', 'rock3', 'rock4', 'rock5', 'rock6'];
     }
 
     //placing scene objects before game start
@@ -61,9 +61,10 @@ class Play extends Phaser.Scene{
         this.gameOver = false;
 
         //boss-spawning variables
-        this.bossLevel = 1;         //should start at 1
-        this.killsUntilBoss = 15;    //should start at 15
+        this.bossLevel = 3;         //should start at 1
+        this.killsUntilBoss = 1;    //should start at 15
         this.bossActive = false;
+        this.boss;
     }
 
     //called once a frame
@@ -79,15 +80,15 @@ class Play extends Phaser.Scene{
 
             //check to spawn boss
             if(!this.bossActive && this.killsUntilBoss <= this.player.bodyCount){
-                this.enemyGroup.add(new SkeletonKnightBoss(
+                this.boss = new SkeletonKnightBoss(
                     this,                                   //scene
                     config.width/2,                         //x
-                    -100,                                    //y
-                    'skeleton_knight_boss',                   //sprite
-                    0,                                      //start frame of anim
+                    -325,                                    //y
+                    'enemies',                   //sprite
+                    'mid_attack1',                                      //start frame of anim
                     this.bossLevel
                     )
-                );
+                this.enemyGroup.add(this.boss);
             }
         }
     }
@@ -99,7 +100,8 @@ class Play extends Phaser.Scene{
                 this,                                   //scene
                 Phaser.Math.Between(0, config.width),   //x
                 -32,                                    //y
-                obstacle                                //sprite
+                'obstacles',                                //sprite
+                obstacle
                 )
             );
         }
@@ -111,8 +113,8 @@ class Play extends Phaser.Scene{
                 this,                                   //scene
                 Phaser.Math.Between(0, config.width),    //x
                 -32,                                    //y
-                'zombie',                               //sprite
-                0,                                      //start frame of anim
+                'enemies',                               //sprite
+                'forward_walk1',                                      //start frame of anim
                 )
             );
         }

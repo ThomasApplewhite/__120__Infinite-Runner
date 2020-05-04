@@ -16,7 +16,7 @@ class Load extends Phaser.Scene{
         this.add.text(this.textShift, this.textSpace, "Loading images...", this.textConfig);
         this.textSpace += 20;
 
-        this.load.image('title', './assets/Title_Large.png');
+        this.load.image('title', './assets/Title.png');
         //this.load.image('start_button', './assets/start_button.png');
 
         //background images
@@ -24,17 +24,11 @@ class Load extends Phaser.Scene{
 
         //placeholder images
         //Lines with a /*$*/ are still usimg placeholder assets
-        /*$*/this.load.image('obstacle', './assets/placeholders/obstacle_placeholder.png');
         /*$*/this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
         /*$*/this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');      
-        /*$*/
-        /*$*/this.load.image('magic_missile_blast', './assets/placeholders/magic_missile_blast_placeholder.png');
-        /*$*/this.load.image('orc_punch', './assets/placeholders/orc_punch_placeholder.png');
         /*$*/this.load.image('skeleton_knight_boss', './assets/placeholders/skeleton_knight_boss_placeholder.png');
         /*$*/this.load.image('dominating_strike', './assets/placeholders/dominating_strike_placeholder.png');
         /*$*/this.load.image('sweeping_strike', './assets/placeholders/sweeping_strike_placeholder.png');
-        /*$*/this.load.image('lashing_strike', './assets/placeholders/lashing_strike_placeholder.png');
-        /*$*/this.load.image('magic_missile_particle', './assets/placeholders/magic_missile_particle_placeholder.png');
 
         //background images
         this.load.image('backgroundTile', './assets/cave_tiles_standard.png');
@@ -44,21 +38,37 @@ class Load extends Phaser.Scene{
         //this.load.image('player', './assets/orc_monk.png');
         this.load.atlas({
             key: 'player',
-            textureURL: './assets/characters/orc_monk.png',
-            atlasURL: './assets/characters/orc_monk.json'
+            textureURL: './assets/atlases/orc_monk.png',
+            atlasURL: './assets/atlases/orc_monk.json'
         });
 
         //attack images
+        this.load.atlas({
+            key: 'attacks',
+            textureURL: './assets/atlases/attacks.png',
+            atlasURL: './assets/atlases/attacks.json'
+        });
+        this.load.image('lashing_strike', './assets/hook.png');
         this.load.image('magic_missile', './assets/missle.png');
 
         //obstacle images
-        this.load.image('rock', './assets/rock1.png');
+        /*this.load.image('rock', './assets/rock1.png');
         this.load.image('stalagmite', './assets/rock2.png');
-        this.load.image('dirt_wall', './assets/dirt_wall_1.png');
+        this.load.image('dirt_wall', './assets/dirt_wall_1.png');*/
+        this.load.atlas({
+            key: 'obstacles',
+            textureURL: './assets/atlases/obstacles.png',
+            atlasURL: './assets/atlases/obstacles.json'
+        });
         
 
         //enemy images
         this.load.image('zombie', './assets/zombie.png');
+        this.load.atlas({
+            key: 'enemies',
+            textureURL: './assets/atlases/enemies.png',
+            atlasURL: './assets/atlases/enemies.json'
+        })
 
         //UI images
         this.load.image('heartUI', './assets/heart.png');
@@ -103,6 +113,7 @@ class Load extends Phaser.Scene{
         this.textSpace += 20;*/
 
         //creating animations
+        //---ORC ANIMS---
         this.anims.create({
             key: 'orc_punchAnim',
             frameRate: 5,
@@ -113,7 +124,6 @@ class Load extends Phaser.Scene{
             }),
             repeat: 0
         });
-
         this.anims.create({
             key: 'orc_stunAnim',
             frameRate: 5,
@@ -124,7 +134,6 @@ class Load extends Phaser.Scene{
             }),
             repeat: -1
         });
-
         this.anims.create({
             key: 'orc_walkAnim',
             frameRate: 10,
@@ -135,6 +144,68 @@ class Load extends Phaser.Scene{
             }),
             repeat: -1
         });
+        //---ATTACK ANIMS---
+        this.anims.create({
+            key: 'punch_effectAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('attacks', {
+                start: 1,
+                end: 4,
+                prefix: 'power_punch' 
+            }),
+        });
+        this.anims.create({
+            key: 'missle_blastAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('attacks', {
+                start: 1,
+                end: 5,
+                prefix: 'missle_explode' 
+            }),
+        });
+        //---ENEMY ANIMS
+        this.anims.create({
+            key: 'zombie_walkAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('enemies', {
+                start: 1,
+                end: 5,
+                prefix: 'forward_walk' 
+            }),
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'zombie_attackAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('enemies', {
+                start: 1,
+                end: 3,
+                prefix: 'forward_attack' 
+            }),
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'boss_dominatingAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('enemies', {
+                start: 1,
+                end: 4,
+                prefix: 'mid_attack'
+            })
+        });
+        this.anims.create({
+            key: 'boss_sweepingAnim',
+            frameRate: 10,
+            frames: this.anims.generateFrameNames('enemies', {
+                start: 1,
+                end: 4,
+                prefix: 'skelly_boss_sweep'
+            })
+        });
+
+
+
+
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
         
@@ -166,7 +237,7 @@ class Load extends Phaser.Scene{
                 this.music = this.sound.add('bgm');
                 this.music.play({
                     mute: false,
-                    volume: 1,
+                    volume: 0.75,
                     rate: 1,
                     detune: 0,
                     seek: 0,

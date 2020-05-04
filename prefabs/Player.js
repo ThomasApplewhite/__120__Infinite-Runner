@@ -125,8 +125,8 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.scene,
                 this.x + 32, //this.body.sourceWidth/2,
                 this.y - 16, //this.body.sourceHeight/2,
-                'orc_punch',
-                0,
+                'attacks',
+                'power_punch1',
                 1               //the damage of the punch
                 )
             );

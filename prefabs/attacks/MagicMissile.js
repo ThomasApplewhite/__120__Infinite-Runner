@@ -27,8 +27,8 @@ class MagicMissile extends Attack{
             this.scene, 
             this.x, 
             this.y, 
-            'magic_missile_blast', 
-            0, 
+            'attacks', 
+            'missle_explode1', 
             this.damage
             )
         );

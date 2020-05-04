@@ -9,7 +9,6 @@ class Boss extends Enemy{
     bossVibes(){
         this.scene.obstacleSpawnTimer = false;
         this.scene.enemySpawnTimer.paused = false;
-        this.scene.bossLaughSFX.play();
     }
     
     //anything special that happens when the enemy dies

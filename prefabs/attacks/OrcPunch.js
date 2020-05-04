@@ -9,6 +9,7 @@ class OrcPunch extends Attack{
         this.body.setSize(64, 16);
 
         this.scene.punchSFX.play();
+        this.anims.play('punch_effectAnim');
 
         this.scene.time.addEvent({
             delay: 1/3 * 1000,       //active for 20 frames (1/3 of a second)
