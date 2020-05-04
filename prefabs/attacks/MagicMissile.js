@@ -7,6 +7,8 @@ class MagicMissile extends Attack{
         this.damage = 5;
         this.body.setVelocityY(-300);
 
+        this.scene.mmShotSFX.play();
+
         //add to collision group
         //console.log(this.body);
 

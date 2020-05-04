@@ -6,6 +6,8 @@ class MagicMissileBlast extends Attack{
         this.body.setImmovable();
         //this.body.onOverlap = true;
 
+        this.scene.mmBlastSFX.play();
+
         this.scene.time.addEvent({
             delay: 250,
             callback: this.removeSelf,

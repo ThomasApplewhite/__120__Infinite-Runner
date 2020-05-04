@@ -32,6 +32,9 @@ class Play extends Phaser.Scene{
 
         //creating sounds
         this.punchSFX = this.sound.add('punchSound');
+        this.mmShotSFX = this.sound.add('magic_missile_firingSound');
+        this.mmBlastSFX = this.sound.add('magic_missile_explosionSound');
+        this.bossLaughSFX = this.sound.add('bossLaugh');
 
         //creating the player
         this.player = new Player(

@@ -2,6 +2,7 @@ class Boss extends Enemy{
     constructor(scene, x, y, texture, frame, health, points){
         super(scene, x, y, texture, frame, health, points);
 
+        this.scene.bossLaughtSFX.play();
         this.bossVibes();
     }
 
