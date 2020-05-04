@@ -8,6 +8,8 @@ class Load extends Phaser.Scene{
         }
         this.textSpace = 20;
         this.textShift = 20;
+
+        this.starting = false;
     }
 
     preload(){
@@ -68,7 +70,7 @@ class Load extends Phaser.Scene{
         this.load.audio('magic_missile_explosionSound', './assets/sounds/Magic Missile Explosion.mp3');
         this.load.audio('magic_missile_firingSound', './assets/sounds/Magic Missile Firing.mp3');
         this.load.audio('punchSound', './assets/sounds/Punch.mp3');
-        //this.load.audio('spooky', './assets/sounds/Spooky.mp3');
+        this.load.audio('bossLaugh', './assets/sounds/Boss Laugh.mp3');
 
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
@@ -86,6 +88,8 @@ class Load extends Phaser.Scene{
         keyE     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);   //magic missile
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;*/
+
+        keyQ     =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
         this.add.text(this.textShift, this.textSpace, "Generating animations...", this.textConfig);
         this.textSpace += 20;
@@ -125,23 +129,53 @@ class Load extends Phaser.Scene{
         });
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);
         this.textSpace += 20;
+        
+        //fun stuff for load screen
+        this.messages = new Array(
+            'Prepare for undead...',
+            'Opening the pit...',
+            'The gates are opening...', 
+            'The Darkworld beckons...',
+            'Damning your soul...',
+            'Raising the dead...',
+            'Sealing the pact...',
+            'You won’t escape...',
+            'There’s no salvation...',
+            'Hook doesn’t hurt...',
+            'Crimson brings pain...',
+        );
 
-        this.time.addEvent({
+        this.nextSceneTime = this.time.addEvent({
             delay: 3000,
             callback: () => {this.scene.start("menuScene");},
             loop: false,
         });
-        
-        //this.spook = this.sound.add('spooky');
-        //this.spook.play();
+        this.nextSceneTime.paused = true;
+
+        this.add.text(this.textShift, this.textSpace, "Press (Q) to Continue...", this.textConfig);
+        this.textSpace += 20;
     }
 
     update(){
-        this.add.text(this.textShift, this.textSpace, "Opening the pit...", this.textConfig);
-        this.textSpace += 20;
-        if(this.textSpace > game.config.height){
-            this.textSpace = 20;
-            this.textShift += 200;
+        if(keyQ.isDown){
+            this.oneShotStarts();
+            this.starting = true;
+        }
+
+        if(this.starting){
+            this.add.text(this.textShift, this.textSpace, Phaser.Math.RND.pick(this.messages), this.textConfig);
+            this.textSpace += 20;
+            if(this.textSpace > game.config.height){
+                this.textSpace = 20;
+                this.textShift += 200;
+            }
+        }
+    }
+
+    oneShotStarts(){
+        if(!this.starting){
+            this.sound.add('bossLaugh').play({volume: 0.25});
+            this.nextSceneTime.paused = false;
         }
     }
 }
