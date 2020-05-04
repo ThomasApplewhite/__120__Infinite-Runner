@@ -72,13 +72,21 @@ class Play extends Phaser.Scene{
         this.scoreText = this.add.text(20, 60, "Score: 0", this.uiConfig,)
         this.scoreText.depth = 1;
         this.magicMissileMeter = [
-            this.add.sprite(game.config.width - 30, 20, 'magic_missile_particle'),
-            this.add.sprite(game.config.width - 30, 40, 'magic_missile_particle'),
-            this.add.sprite(game.config.width - 30, 60, 'magic_missile_particle'),
+            this.add.sprite(game.config.width - 40, 110, 'magic_missileUI'),
+            this.add.sprite(game.config.width - 110, 110, 'magic_missileUI'),
+            this.add.sprite(game.config.width - 180, 110, 'magic_missileUI'),
         ];
         this.magicMissileMeter[0].depth = 1;
         this.magicMissileMeter[1].depth = 1;
         this.magicMissileMeter[2].depth = 1;
+        this.heartMeter = [
+            this.add.sprite(game.config.width - 40, 40, 'heartUI'),
+            this.add.sprite(game.config.width - 110, 40, 'heartUI'),
+            this.add.sprite(game.config.width - 180, 40, 'heartUI')
+        ]
+        this.heartMeter[0].depth = 1;
+        this.heartMeter[1].depth = 1;
+        this.heartMeter[2].depth = 1;
         
         //game-over flag
         this.gameOver = false;
@@ -154,6 +162,10 @@ class Play extends Phaser.Scene{
         }else if(param <= 3){
             this.magicMissileMeter[param-1].visible = true;
         }
+    }
+
+    healthUpdate(param){
+        this.heartMeter[param-1].visible = false;
     }
 
     finishGame(){

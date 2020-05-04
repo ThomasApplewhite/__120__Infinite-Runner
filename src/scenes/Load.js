@@ -27,7 +27,7 @@ class Load extends Phaser.Scene{
         /*$*/this.load.image('obstacle', './assets/placeholders/obstacle_placeholder.png');
         /*$*/this.load.image('invisible_wall', './assets/placeholders/invisible_wall.png');
         /*$*/this.load.image('invisible_wall_rotated', './assets/placeholders/invisible_wall_rotated.png');      
-        /*$*/this.load.image('magic_missile', './assets/placeholders/magic_missile_placeholder.png');
+        /*$*/
         /*$*/this.load.image('magic_missile_blast', './assets/placeholders/magic_missile_blast_placeholder.png');
         /*$*/this.load.image('orc_punch', './assets/placeholders/orc_punch_placeholder.png');
         /*$*/this.load.image('skeleton_knight_boss', './assets/placeholders/skeleton_knight_boss_placeholder.png');
@@ -49,15 +49,20 @@ class Load extends Phaser.Scene{
         });
 
         //attack images
+        this.load.image('magic_missile', './assets/missle.png');
 
         //obstacle images
-        this.load.image('rock', './assets/rock_1.png');
-        this.load.image('stalagmite', './assets/stalagmite_1.png');
+        this.load.image('rock', './assets/rock1.png');
+        this.load.image('stalagmite', './assets/rock2.png');
         this.load.image('dirt_wall', './assets/dirt_wall_1.png');
         
 
         //enemy images
         this.load.image('zombie', './assets/zombie.png');
+
+        //UI images
+        this.load.image('heartUI', './assets/heart.png');
+        this.load.image('magic_missileUI', './assets/missle_charge.png');
 
 
         this.add.text(this.textShift, this.textSpace, "Complete", this.textConfig);

@@ -95,6 +95,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     takeDamage(){
         if(!this.stunned && !this.immune){
+            this.scene.healthUpdate(this.lives);
             this.lives -= 1;
             if(this.lives > 0){
                 this.startStun(250);
