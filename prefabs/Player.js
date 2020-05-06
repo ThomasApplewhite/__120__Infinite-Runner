@@ -62,11 +62,11 @@ class Player extends Phaser.GameObjects.Sprite{
             this.anims.stop();
         }*/
 
-        if(!this.stunned && this.normalAttack.isDown){
+        if(!this.stunned && Phaser.Input.Keyboard.JustDown(this.normalAttack)){
             this.punchAttack();
         }
 
-        if(!this.stunned && this.specialAttack.isDown){
+        if(!this.stunned && Phaser.Input.Keyboard.JustDown(this.specialAttack)){
             this.magicMissileAttack();
         }
 
